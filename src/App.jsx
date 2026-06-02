@@ -5,6 +5,8 @@ import AppRoutes from "./AppRoutes";
 import {PersistQueryClientProvider} from "@tanstack/react-query-persist-client";
 import {get, set, del} from "idb-keyval";
 import {Button} from "./components/ui/button";
+import {ThemeProvider} from "next-themes";
+import useOfflineSync from "./hooks/useOfflineSync";
 
 // 1. إعداد الـ Query Client مع إعدادات الـ Offline للـ Mutations
 const queryClient = new QueryClient({
@@ -33,26 +35,37 @@ const idbPersister = {
   },
 };
 
+function OfflineSyncInitializer() {
+  useOfflineSync();
+  return null;
+}
+
 function App() {
   return (
-    <PersistQueryClientProvider
-      client={queryClient}
-      persistOptions={{
-        persister: idbPersister,
-        maxAge: 1000 * 60 * 60 * 24, // 24 hours
-      }}>
-      <AppRoutes />
-      <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-right" />
-      <Toaster
-        position="top-center"
-        gutter={12}
-        containerClassName=""
-        containerStyle={{}}
-        toastOptions={{
-          duration: 4000,
-        }}
-      />
-    </PersistQueryClientProvider>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <PersistQueryClientProvider
+        client={queryClient}
+        persistOptions={{
+          persister: idbPersister,
+          maxAge: 1000 * 60 * 60 * 24, // 24 hours
+        }}>
+        <OfflineSyncInitializer />
+        <AppRoutes />
+        <ReactQueryDevtools
+          initialIsOpen={false}
+          buttonPosition="bottom-right"
+        />
+        <Toaster
+          position="top-center"
+          gutter={12}
+          containerClassName=""
+          containerStyle={{}}
+          toastOptions={{
+            duration: 4000,
+          }}
+        />
+      </PersistQueryClientProvider>
+    </ThemeProvider>
   );
 }
 

@@ -1,7 +1,7 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {lazy, Suspense} from "react";
-import AppLayout from "./components/AppLayout";
-import ProtectedRoutes from "./components/ProtectedRoutes";
+import AppLayout from "./components/ownUI/AppLayout";
+import ProtectedRoutes from "./components/ownUI/ProtectedRoutes";
 import PublicLayout from "./features/public/PublicLayout";
 import {Spinner} from "./components/ui/spinner";
 

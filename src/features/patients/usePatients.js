@@ -14,10 +14,16 @@ function usePatients() {
     isPending: isLoadingPatientsQuery,
     error,
     isError,
+    refetch,
+    isFetching,
   } = useQuery({
     queryKey: ["patients", clinicId, query],
     queryFn: () => getClinicPatients({clinicId, query}),
     enabled: !!clinicId,
+    staleTime: 0,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    retry: 1,
   });
 
   return {
@@ -25,6 +31,8 @@ function usePatients() {
     isLoadingPatients: isLoadingUser || isLoadingPatientsQuery,
     error,
     isError,
+    refetch,
+    isFetching,
   };
 }
 

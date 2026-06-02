@@ -1,6 +1,6 @@
 import {Navigate, Outlet, useLocation} from "react-router-dom";
-import useUser from "../features/auth/useUser";
-import {Spinner} from "./ui/spinner";
+import useUser from "../../features/auth/useUser";
+import {Spinner} from "../ui/spinner";
 
 function ProtectedRoutes() {
   const {isAuthenticated, isPending} = useUser();

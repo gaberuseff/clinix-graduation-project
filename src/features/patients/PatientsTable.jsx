@@ -1,5 +1,5 @@
-import EmptyState from "@/components/EmptyState";
-import TableSkeleton from "@/components/TableSkeleton";
+import EmptyState from "@/components/ownUI/EmptyState";
+import TableSkeleton from "@/components/ownUI/TableSkeleton";
 import {Badge} from "@/components/ui/badge";
 import {Button} from "@/components/ui/button";
 import {
@@ -19,7 +19,7 @@ import {
 import useDeletePatient from "@/features/patients/useDeletePatient";
 import usePatients from "@/features/patients/usePatients";
 import CreatePatientDrawer from "./CreatePatientDrawer";
-import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
+import ConfirmDeleteModal from "@/components/ownUI/ConfirmDeleteModal";
 import {useState} from "react";
 import {
   RiCalendarEventLine,

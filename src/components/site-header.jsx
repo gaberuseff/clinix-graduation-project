@@ -1,6 +1,7 @@
 import {Separator} from "@/components/ui/separator";
 import {SidebarTrigger} from "@/components/ui/sidebar";
-import {OnlineStatus} from "@/components/online-status";
+import {OnlineStatus} from "@/components/ownUI/online-status";
+import {ModeToggle} from "@/components/mode-toggle";
 import useUser from "@/features/auth/useUser";
 
 export function SiteHeader() {
@@ -17,10 +18,12 @@ export function SiteHeader() {
           />
           <h1 className="text-base font-medium">Good Day, {firstName}</h1>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <OnlineStatus />
+          <ModeToggle />
         </div>
       </div>
     </header>
   );
 }
+

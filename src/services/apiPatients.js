@@ -4,7 +4,8 @@ export async function getClinicPatients({clinicId, query}) {
   let queryBuilder = supabase
     .from("patients")
     .select("*")
-    .eq("clinic_id", clinicId);
+    .eq("clinic_id", clinicId)
+    .eq("is_active", true);
 
   if (query) {
     queryBuilder = queryBuilder.or(
@@ -38,7 +39,10 @@ export async function createPatient(newPatient) {
 }
 
 export async function deletePatient({id}) {
-  const {data, error} = await supabase.from("patients").delete().eq("id", id);
+  const {data, error} = await supabase
+    .from("patients")
+    .update({is_active: false})
+    .eq("id", id);
 
   if (error) {
     console.error(error);
