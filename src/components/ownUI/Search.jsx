@@ -53,7 +53,7 @@ function Search({paramName = "search", placeholder = "Search...", className = ""
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="pl-10 pr-9 h-10 w-full rounded-xl border border-input/60 focus-visible:ring-primary/20 bg-input/10"
+        className="pl-10 pr-9 w-full"
       />
       {query && (
         <button

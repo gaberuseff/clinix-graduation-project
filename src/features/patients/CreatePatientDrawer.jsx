@@ -178,7 +178,7 @@ function CreatePatientDrawer({
                 type="text"
                 autoComplete="off"
                 placeholder="e.g. John Doe"
-                className="w-full mt-1 px-4 py-2.5 rounded-xl border border-input/60 focus-visible:ring-primary/20"
+                className="w-full mt-1"
                 {...register("name", {
                   required: "Patient name is required",
                   minLength: {
@@ -204,7 +204,7 @@ function CreatePatientDrawer({
                 type="tel"
                 autoComplete="off"
                 placeholder="e.g. +1234567890"
-                className="w-full mt-1 px-4 py-2.5 rounded-xl border border-input/60 focus-visible:ring-primary/20"
+                className="w-full mt-1"
                 {...register("phone", {
                   required: "Phone number is required",
                   pattern: {
@@ -229,7 +229,7 @@ function CreatePatientDrawer({
                 type="number"
                 autoComplete="off"
                 placeholder="e.g. 1995"
-                className="w-full mt-1 px-4 py-2.5 rounded-xl border border-input/60 focus-visible:ring-primary/20"
+                className="w-full mt-1"
                 {...register("birth_year", {
                   min: {
                     value: 1900,
@@ -260,7 +260,7 @@ function CreatePatientDrawer({
                     onValueChange={field.onChange}
                     value={field.value}
                     defaultValue={field.value}>
-                    <SelectTrigger className="w-full h-11 mt-1 px-4 rounded-xl border border-input/60 bg-input/30 text-sm transition-colors focus-visible:ring-primary/20 cursor-pointer">
+                    <SelectTrigger className="w-full mt-1">
                       <SelectValue placeholder="Select Gender" />
                     </SelectTrigger>
                     <SelectContent
@@ -283,13 +283,13 @@ function CreatePatientDrawer({
               variant="outline"
               disabled={isPending}
               onClick={() => setIsOpen(false)}
-              className="flex-1 py-2.5 rounded-xl text-sm font-semibold">
+              className="flex-1">
               Cancel
             </Button>
             <Button
               type="submit"
               disabled={isPending}
-              className="flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2">
+              className="flex-1 flex items-center justify-center gap-2">
               {isPending && <Spinner className="size-4" />}
               <span>{isEditSession ? "Save Changes" : "Save Patient"}</span>
             </Button>

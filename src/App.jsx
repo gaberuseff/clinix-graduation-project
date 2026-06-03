@@ -1,11 +1,10 @@
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {QueryClient} from "@tanstack/react-query";
 import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
+import {PersistQueryClientProvider} from "@tanstack/react-query-persist-client";
+import {del, get, set} from "idb-keyval";
+import {ThemeProvider} from "next-themes";
 import {Toaster} from "react-hot-toast";
 import AppRoutes from "./AppRoutes";
-import {PersistQueryClientProvider} from "@tanstack/react-query-persist-client";
-import {get, set, del} from "idb-keyval";
-import {Button} from "./components/ui/button";
-import {ThemeProvider} from "next-themes";
 import useOfflineSync from "./hooks/useOfflineSync";
 
 // 1. إعداد الـ Query Client مع إعدادات الـ Offline للـ Mutations

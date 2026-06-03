@@ -24,6 +24,13 @@ function useDeletePatient() {
 
       queryClient.setQueriesData({queryKey: ["patients"]}, (old) => {
         if (!old) return old;
+        if (old && typeof old === "object" && !Array.isArray(old)) {
+          return {
+            ...old,
+            data: old.data?.filter((patient) => patient.id !== id),
+            count: Math.max(0, (old.count || 0) - 1),
+          };
+        }
         return old.filter((patient) => patient.id !== id);
       });
 

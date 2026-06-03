@@ -87,7 +87,7 @@ function BreadcrumbSeparator({
       className={cn("[&>svg]:size-3.5", className)}
       {...props}>
       {children ?? (
-        <RiArrowRightSLine />
+        <RiArrowRightSLine className="rtl:rotate-180" />
       )}
     </li>
   );

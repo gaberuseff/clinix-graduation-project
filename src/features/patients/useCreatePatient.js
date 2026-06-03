@@ -33,6 +33,12 @@ function useCreatePatient() {
       });
 
       queryClient.setQueriesData({queryKey: ["patients"]}, (old) => {
+        if (old && typeof old === "object" && !Array.isArray(old)) {
+          return {
+            data: old.data ? [offlinePatient, ...old.data] : [offlinePatient],
+            count: (old.count || 0) + 1,
+          };
+        }
         return old ? [offlinePatient, ...old] : [offlinePatient];
       });
 

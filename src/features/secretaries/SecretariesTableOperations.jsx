@@ -1,21 +1,19 @@
-import Search from "@/components/ownUI/Search";
 import {Button} from "@/components/ui/button";
-import usePatients from "@/features/patients/usePatients";
 import {RiRefreshLine} from "@remixicon/react";
+import useSecretaries from "./useSecretaries";
 
-function PatientsTableOperations() {
-  const {refetch, isFetching} = usePatients();
+function SecretariesTableOperations() {
+  const {refetch, isFetching} = useSecretaries();
 
   return (
     <div className="flex items-center gap-2.5 w-full sm:w-auto">
-      <Search placeholder="Search patients by name or phone..." />
       <Button
         variant="outline"
         size="icon"
         onClick={() => refetch()}
         disabled={isFetching}
         className="shrink-0"
-        title="Refresh patients list">
+        title="Refresh secretaries list">
         <RiRefreshLine
           className={`size-4 text-muted-foreground ${
             isFetching ? "animate-spin text-primary" : ""
@@ -26,4 +24,4 @@ function PatientsTableOperations() {
   );
 }
 
-export default PatientsTableOperations;
+export default SecretariesTableOperations;
