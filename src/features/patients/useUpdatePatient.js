@@ -27,6 +27,14 @@ function useUpdatePatient() {
 
       queryClient.setQueriesData({queryKey: ["patients"]}, (old) => {
         if (!old) return old;
+        if (old && typeof old === "object" && !Array.isArray(old)) {
+          return {
+            ...old,
+            data: old.data?.map((patient) =>
+              patient.id === id ? {...patient, ...updatedFields} : patient,
+            ),
+          };
+        }
         return old.map((patient) =>
           patient.id === id ? {...patient, ...updatedFields} : patient,
         );

@@ -51,14 +51,14 @@ function ConfirmDeleteModal({
               variant="outline"
               onClick={onClose}
               disabled={isDeleting}
-              className="flex-1 py-2.5 rounded-xl text-sm font-semibold cursor-pointer">
+              className="flex-1">
               Cancel
             </Button>
             <Button
               variant="destructive"
               onClick={onConfirm}
               disabled={isDeleting}
-              className="flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer">
+              className="flex-1 flex items-center justify-center gap-2">
               {isDeleting && <Spinner className="size-4" />}
               <span>Delete</span>
             </Button>

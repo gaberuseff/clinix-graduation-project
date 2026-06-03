@@ -6,12 +6,12 @@
   "tailwind": {
     "config": "",
     "css": "src/index.css",
-    "baseColor": "mist",
+    "baseColor": "olive",
     "cssVariables": true,
     "prefix": ""
   },
   "iconLibrary": "remixicon",
-  "rtl": false,
+  "rtl": true,
   "aliases": {
     "components": "@/components",
     "utils": "@/lib/utils",

@@ -1,9 +1,10 @@
 import {supabase} from "./supabase";
+import {PAGE_SIZE} from "@/utils/constants";
 
-export async function getClinicPatients({clinicId, query}) {
+export async function getClinicPatients({clinicId, query, page}) {
   let queryBuilder = supabase
     .from("patients")
-    .select("*")
+    .select("*", { count: "exact" })
     .eq("clinic_id", clinicId)
     .eq("is_active", true);
 
@@ -13,14 +14,39 @@ export async function getClinicPatients({clinicId, query}) {
     );
   }
 
-  const {data, error} = await queryBuilder;
+  if (page) {
+    const from = (page - 1) * PAGE_SIZE;
+    const to = from + PAGE_SIZE - 1;
+    queryBuilder = queryBuilder.range(from, to);
+  }
+
+  queryBuilder = queryBuilder.order("created_at", { ascending: false });
+
+  const {data, count, error} = await queryBuilder;
 
   if (error) {
+    if (error.code === "PGRST103") {
+      let countBuilder = supabase
+        .from("patients")
+        .select("*", { count: "exact", head: true })
+        .eq("clinic_id", clinicId)
+        .eq("is_active", true);
+
+      if (query) {
+        countBuilder = countBuilder.or(
+          `name.ilike.%${query}%,phone.ilike.%${query}%`,
+        );
+      }
+
+      const { count: totalCount } = await countBuilder;
+      return { data: [], count: totalCount || 0 };
+    }
+
     console.error(error);
     throw new Error("Failed to load patients data");
   }
 
-  return data;
+  return {data, count};
 }
 
 export async function createPatient(newPatient) {

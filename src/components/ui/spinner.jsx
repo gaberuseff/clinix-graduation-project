@@ -1,15 +1,17 @@
-import {cn} from "@/lib/utils";
-import {RiLoader4Line} from "@remixicon/react";
+import { cn } from "@/lib/utils"
+import { RiLoaderLine } from "@remixicon/react"
 
-function Spinner({className, ...props}) {
+function Spinner({
+  className,
+  ...props
+}) {
   return (
-    <RiLoader4Line
+    <RiLoaderLine
       role="status"
       aria-label="Loading"
       className={cn("size-4 animate-spin", className)}
-      {...props}
-    />
+      {...props} />
   );
 }
 
-export {Spinner};
+export { Spinner }

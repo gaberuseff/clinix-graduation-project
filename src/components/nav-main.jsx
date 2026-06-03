@@ -32,7 +32,7 @@ export function NavMain({items}) {
             </Button>
           </SidebarMenuItem>
         </SidebarMenu>
-        <SidebarMenu>
+        <SidebarMenu className="gap-1.5">
           {items.map((item) => {
             const isActive = location.pathname === item.url;
             return (
