@@ -1,9 +1,9 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {lazy, Suspense} from "react";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import AppLayout from "./components/ownUI/AppLayout";
 import ProtectedRoutes from "./components/ownUI/ProtectedRoutes";
-import PublicLayout from "./features/public/PublicLayout";
 import {Spinner} from "./components/ui/spinner";
+import PublicLayout from "./features/public/PublicLayout";
 
 // Lazy-loaded pages (Code-Splitting)
 const Appointments = lazy(() => import("./pages/Appointments"));
@@ -12,6 +12,8 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const Patients = lazy(() => import("./pages/Patients"));
 const Register = lazy(() => import("./pages/Register"));
 const Secretaries = lazy(() => import("./pages/Secretaries"));
+const Settings = lazy(() => import("./pages/Settings"));
+const Discounts = lazy(() => import("./pages/Discounts"));
 
 function PageLoader() {
   return (
@@ -38,6 +40,8 @@ function AppRoutes() {
               <Route path="/patients" element={<Patients />} />
               <Route path="/secretaries" element={<Secretaries />} />
               <Route path="/appointments" element={<Appointments />} />
+              <Route path="/discounts" element={<Discounts />} />
+              <Route path="/settings" element={<Settings />} />
             </Route>
           </Route>
 

@@ -84,7 +84,7 @@ function SecretariesTable() {
           setIsDeleteOpen(false);
           setSecretaryToDelete(null);
         },
-      }
+      },
     );
   }
 
@@ -119,7 +119,9 @@ function SecretariesTable() {
                   className="border-b border-border/25">
                   <TableCell className="py-4 pl-6 font-semibold text-foreground/90 font-sans">
                     <div className="flex items-center gap-2.5">
-                      <span className="capitalize">{secretary.full_name || "—"}</span>
+                      <span className="capitalize">
+                        {secretary.full_name || "—"}
+                      </span>
                     </div>
                   </TableCell>
 
@@ -207,7 +209,7 @@ function SecretariesTable() {
         onConfirm={handleConfirmDelete}
         itemName={secretaryToDelete?.full_name}
         title="Delete Secretary"
-        description="Are you sure you want to delete this secretary account? This action is permanent and will remove them from Supabase Auth and the database."
+        description="Are you sure you want to delete this secretary account?"
         isDeleting={isUpdating}
       />
     </>

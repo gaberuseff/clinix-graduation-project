@@ -32,11 +32,21 @@ export default defineConfig({
             if (id.includes("@supabase")) {
               return "vendor-supabase";
             }
+            // Separate React core packages
+            if (id.includes("react") || id.includes("react-dom") || id.includes("scheduler")) {
+              if (!id.includes("react-router")) {
+                return "vendor-react";
+              }
+            }
+            // Separate TanStack Query and Table packages
+            if (id.includes("@tanstack")) {
+              return "vendor-tanstack";
+            }
             // Separate React Router bundle
             if (id.includes("react-router") || id.includes("react-router-dom")) {
               return "vendor-router";
             }
-            // Standard react / react-query packages
+            // Fallback for standard packages
             return "vendor";
           }
         },

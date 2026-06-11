@@ -50,13 +50,13 @@ const data = {
       url: "/discounts",
       icon: <RiPercentLine />,
     },
-  ],
-  navSecondary: [
     {
       title: "Settings",
       url: "/settings",
       icon: <RiSettingsLine />,
     },
+  ],
+  navSecondary: [
     {
       title: "Get Help",
       url: "/help",
