@@ -2,15 +2,17 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {updatePatient as updatePatientApi} from "@/services/apiPatients";
 import {toast} from "react-hot-toast";
 import {addToOfflineQueue} from "@/services/offlineSync";
+import {useAppTranslation} from "@/i18n/use-app-translation";
 
 function useUpdatePatient() {
   const queryClient = useQueryClient();
+  const {t} = useAppTranslation("patients");
 
   const {mutateAsync: updatePatientMutation, isPending: isUpdating} =
     useMutation({
       mutationFn: updatePatientApi,
       onSuccess: () => {
-        toast.success("Patient updated successfully!", {id: "update_patient"});
+        toast.success(t("toasts.updateSuccess"), {id: "update_patient"});
         queryClient.invalidateQueries({
           queryKey: ["patients"],
         });
@@ -41,7 +43,7 @@ function useUpdatePatient() {
       });
 
       toast.success(
-        "Offline: Patient updated locally. Will sync when online.",
+        t("toasts.updateOffline"),
         {
           id: "update_patient_offline",
         },
@@ -72,7 +74,7 @@ function useUpdatePatient() {
       if (isNetworkError) {
         await performOfflineUpdate();
       } else {
-        toast.error(err.message || "Failed to update patient", {
+        toast.error(err.message || t("toasts.updateError"), {
           id: "update_patient",
         });
       }

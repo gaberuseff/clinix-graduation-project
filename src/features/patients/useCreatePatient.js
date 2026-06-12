@@ -2,15 +2,17 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {createPatient as createPatientApi} from "@/services/apiPatients";
 import {toast} from "react-hot-toast";
 import {addToOfflineQueue} from "@/services/offlineSync";
+import {useAppTranslation} from "@/i18n/use-app-translation";
 
 function useCreatePatient() {
   const queryClient = useQueryClient();
+  const {t} = useAppTranslation("patients");
 
   const {mutateAsync: createPatientMutation, isPending: isCreating} =
     useMutation({
       mutationFn: createPatientApi,
       onSuccess: () => {
-        toast.success("Patient added successfully!");
+        toast.success(t("toasts.createSuccess"));
         queryClient.invalidateQueries({
           queryKey: ["patients"],
         });
@@ -42,7 +44,7 @@ function useCreatePatient() {
         return old ? [offlinePatient, ...old] : [offlinePatient];
       });
 
-      toast.success("Offline: Patient saved locally. Will sync when online.", {
+      toast.success(t("toasts.createOffline"), {
         id: "create_patient_offline",
       });
 
@@ -71,7 +73,7 @@ function useCreatePatient() {
       if (isNetworkError) {
         await performOfflineCreate();
       } else {
-        toast.error(err.message || "Failed to create patient");
+        toast.error(err.message || t("toasts.createError"));
       }
     }
   }

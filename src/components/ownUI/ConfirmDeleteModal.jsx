@@ -8,6 +8,7 @@ import {
   DrawerDescription,
   DrawerTitle,
 } from "@/components/ui/drawer";
+import {useAppTranslation} from "@/i18n/use-app-translation";
 
 function ConfirmDeleteModal({
   isOpen,
@@ -18,6 +19,8 @@ function ConfirmDeleteModal({
   itemName = "",
   isDeleting = false,
 }) {
+  const {t} = useAppTranslation("patients");
+
   return (
     <Drawer
       open={isOpen}
@@ -52,7 +55,7 @@ function ConfirmDeleteModal({
               onClick={onClose}
               disabled={isDeleting}
               className="flex-1">
-              Cancel
+              {t("buttons.cancel")}
             </Button>
             <Button
               variant="destructive"
@@ -60,7 +63,7 @@ function ConfirmDeleteModal({
               disabled={isDeleting}
               className="flex-1 flex items-center justify-center gap-2">
               {isDeleting && <Spinner className="size-4" />}
-              <span>Delete</span>
+              <span>{t("buttons.delete")}</span>
             </Button>
           </div>
         </div>

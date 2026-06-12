@@ -19,6 +19,7 @@ import {
   RiQuestionLine,
   RiSettingsLine,
   RiShieldUserLine,
+  RiUserSettingsLine,
   RiUserHeartLine,
 } from "@remixicon/react";
 import {Link} from "react-router-dom";
@@ -61,6 +62,11 @@ const data = {
       title: "Get Help",
       url: "/help",
       icon: <RiQuestionLine />,
+    },
+    {
+      title: "Preferences",
+      url: "/preferences",
+      icon: <RiUserSettingsLine />,
     },
   ],
 };

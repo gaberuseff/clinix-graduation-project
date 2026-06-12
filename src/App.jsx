@@ -6,6 +6,7 @@ import {ThemeProvider} from "next-themes";
 import {Toaster} from "react-hot-toast";
 import AppRoutes from "./AppRoutes";
 import useOfflineSync from "./hooks/useOfflineSync";
+import {LanguageProvider} from "./providers/language-provider";
 
 // 1. إعداد الـ Query Client مع إعدادات الـ Offline للـ Mutations
 const queryClient = new QueryClient({
@@ -49,7 +50,9 @@ function App() {
           maxAge: 1000 * 60 * 60 * 24, // 24 hours
         }}>
         <OfflineSyncInitializer />
+        {/* <LanguageProvider> */}
         <AppRoutes />
+        {/* </LanguageProvider> */}
         <ReactQueryDevtools
           initialIsOpen={false}
           buttonPosition="bottom-right"

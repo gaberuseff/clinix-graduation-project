@@ -1,0 +1,80 @@
+{
+  "title": "Patients",
+  "subtitle": "Manage your patient records and information",
+  "stats": {
+    "totalPatients": "Total Patients",
+    "malePatients": "Male Patients",
+    "femalePatients": "Female Patients",
+    "registered": "Registered",
+    "ofTotal": "of total"
+  },
+  "headers": {
+    "searchPlaceholder": "Search by name or phone...",
+    "refreshTooltip": "Refresh patients list"
+  },
+  "table": {
+    "columns": {
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "gender": "Gender",
+      "birth_year": "Birth Year",
+      "actions": "Actions"
+    }
+  },
+  "buttons": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "addPatient": "Add New Patient",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "close": "Close",
+    "save": "Save",
+    "saveChanges": "Save Changes",
+    "savePatient": "Save Patient"
+  },
+  "modal": {
+    "add": {
+      "title": "Add New Patient",
+      "desc": "Register a new patient by entering their details below. Full name and phone number are required.",
+      "placeholders": {
+        "name": "e.g. John Doe",
+        "phone": "e.g. +1234567890",
+        "birth_year": "e.g. 1995",
+        "gender": "Select Gender"
+      },
+      "options": {
+        "male": "Male",
+        "female": "Female"
+      },
+      "errors": {
+        "nameRequired": "Patient name is required",
+        "nameMinLength": "Name must be at least 2 characters",
+        "phoneRequired": "Phone number is required",
+        "phonePattern": "Please enter a valid phone number",
+        "birthYearMin": "Birth year must be after 1900",
+        "birthYearMax": "Birth year cannot exceed {{year}}",
+        "genderRequired": "Gender is required"
+      }
+    },
+    "edit": {
+      "title": "Edit Patient Details",
+      "desc": "Update the patient's personal and contact details."
+    },
+    "delete": {
+      "title": "Delete Patient",
+      "desc": "Are you sure you want to delete this patient?"
+    }
+  },
+  "toasts": {
+    "createSuccess": "Patient added successfully!",
+    "createOffline": "Offline: Patient saved locally. Will sync when online.",
+    "createError": "Failed to create patient",
+    "updateSuccess": "Patient updated successfully!",
+    "updateOffline": "Offline: Patient updated locally. Will sync when online.",
+    "updateError": "Failed to update patient",
+    "deleteSuccess": "Patient Deleted Successfully",
+    "deleteOffline": "Offline: Patient deleted locally. Will sync when online.",
+    "deleteError": "Failed to delete patient"
+  }
+}
