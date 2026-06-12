@@ -14,6 +14,7 @@ const Register = lazy(() => import("./pages/Register"));
 const Secretaries = lazy(() => import("./pages/Secretaries"));
 const Settings = lazy(() => import("./pages/Settings"));
 const Discounts = lazy(() => import("./pages/Discounts"));
+const Preferences = lazy(() => import("./pages/Preferences"));
 
 function PageLoader() {
   return (
@@ -42,6 +43,7 @@ function AppRoutes() {
               <Route path="/appointments" element={<Appointments />} />
               <Route path="/discounts" element={<Discounts />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/preferences" element={<Preferences />} />
             </Route>
           </Route>
 

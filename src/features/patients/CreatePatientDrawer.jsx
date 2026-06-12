@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/select";
 import useCreatePatient from "./useCreatePatient";
 import useUpdatePatient from "./useUpdatePatient";
+import {useAppTranslation} from "@/i18n/use-app-translation";
 
 function CreatePatientDrawer({
   patientToEdit,
@@ -35,6 +36,7 @@ function CreatePatientDrawer({
   onOpenChange: controlledOnOpenChange,
   showTrigger = true,
 }) {
+  const {t} = useAppTranslation("patients");
   const [localIsOpen, setLocalIsOpen] = useState(false);
 
   const isControlled = controlledIsOpen !== undefined;
@@ -138,7 +140,7 @@ function CreatePatientDrawer({
         <SheetTrigger asChild>
           <Button className="flex items-center gap-2 font-semibold">
             <RiUserAddLine className="size-4" />
-            <span>Add Patient</span>
+            <span>{t("buttons.addPatient")}</span>
           </Button>
         </SheetTrigger>
       )}
@@ -149,13 +151,11 @@ function CreatePatientDrawer({
           <div className="flex items-center gap-2 text-primary">
             <RiUser3Line className="size-6 text-primary" />
             <SheetTitle className="text-xl font-bold tracking-tight">
-              {isEditSession ? "Edit Patient Details" : "Add New Patient"}
+              {isEditSession ? t("modal.edit.title") : t("modal.add.title")}
             </SheetTitle>
           </div>
           <SheetDescription className="text-muted-foreground mt-1">
-            {isEditSession
-              ? "Update the patient's personal and contact details."
-              : "Register a new patient by entering their details below. Full name and phone number are required."}
+            {isEditSession ? t("modal.edit.desc") : t("modal.add.desc")}
           </SheetDescription>
         </SheetHeader>
 
@@ -170,20 +170,20 @@ function CreatePatientDrawer({
                 htmlFor="name"
                 className="text-sm font-semibold flex items-center gap-1.5">
                 <RiUser3Line className="size-4 text-muted-foreground/75" />
-                <span>Full Name</span>
+                <span>{t("table.columns.name")}</span>
                 <span className="text-destructive font-bold text-xs">*</span>
               </FieldLabel>
               <Input
                 id="name"
                 type="text"
                 autoComplete="off"
-                placeholder="e.g. John Doe"
+                placeholder={t("modal.add.placeholders.name")}
                 className="w-full mt-1"
                 {...register("name", {
-                  required: "Patient name is required",
+                  required: t("modal.add.errors.nameRequired"),
                   minLength: {
                     value: 2,
-                    message: "Name must be at least 2 characters",
+                    message: t("modal.add.errors.nameMinLength"),
                   },
                 })}
               />
@@ -196,20 +196,20 @@ function CreatePatientDrawer({
                 htmlFor="phone"
                 className="text-sm font-semibold flex items-center gap-1.5">
                 <RiPhoneLine className="size-4 text-muted-foreground/75" />
-                <span>Phone Number</span>
+                <span>{t("table.columns.phone")}</span>
                 <span className="text-destructive font-bold text-xs">*</span>
               </FieldLabel>
               <Input
                 id="phone"
                 type="tel"
                 autoComplete="off"
-                placeholder="e.g. +1234567890"
+                placeholder={t("modal.add.placeholders.phone")}
                 className="w-full mt-1"
                 {...register("phone", {
-                  required: "Phone number is required",
+                  required: t("modal.add.errors.phoneRequired"),
                   pattern: {
                     value: /^[+]*[0-9\s-]*$/,
-                    message: "Please enter a valid phone number",
+                    message: t("modal.add.errors.phonePattern"),
                   },
                 })}
               />
@@ -222,22 +222,24 @@ function CreatePatientDrawer({
                 htmlFor="birth_year"
                 className="text-sm font-semibold flex items-center gap-1.5">
                 <RiCalendarEventLine className="size-4 text-muted-foreground/75" />
-                <span>Birth Year</span>
+                <span>{t("table.columns.birth_year")}</span>
               </FieldLabel>
               <Input
                 id="birth_year"
                 type="number"
                 autoComplete="off"
-                placeholder="e.g. 1995"
+                placeholder={t("modal.add.placeholders.birth_year")}
                 className="w-full mt-1"
                 {...register("birth_year", {
                   min: {
                     value: 1900,
-                    message: "Birth year must be after 1900",
+                    message: t("modal.add.errors.birthYearMin"),
                   },
                   max: {
                     value: new Date().getFullYear(),
-                    message: `Birth year cannot exceed ${new Date().getFullYear()}`,
+                    message: t("modal.add.errors.birthYearMax", {
+                      year: new Date().getFullYear(),
+                    }),
                   },
                 })}
               />
@@ -249,25 +251,31 @@ function CreatePatientDrawer({
               <FieldLabel
                 htmlFor="gender"
                 className="text-sm font-semibold flex items-center gap-1.5">
-                <span>Gender</span>
+                <span>{t("table.columns.gender")}</span>
               </FieldLabel>
               <Controller
                 control={control}
                 name="gender"
-                rules={{required: "Gender is required"}}
+                rules={{required: t("modal.add.errors.genderRequired")}}
                 render={({field}) => (
                   <Select
                     onValueChange={field.onChange}
                     value={field.value}
                     defaultValue={field.value}>
                     <SelectTrigger className="w-full mt-1">
-                      <SelectValue placeholder="Select Gender" />
+                      <SelectValue
+                        placeholder={t("modal.add.placeholders.gender")}
+                      />
                     </SelectTrigger>
                     <SelectContent
                       position="popper"
                       className="w-[var(--radix-select-trigger-width)]">
-                      <SelectItem value="male">Male</SelectItem>
-                      <SelectItem value="female">Female</SelectItem>
+                      <SelectItem value="male">
+                        {t("modal.add.options.male")}
+                      </SelectItem>
+                      <SelectItem value="female">
+                        {t("modal.add.options.female")}
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                 )}
@@ -284,14 +292,18 @@ function CreatePatientDrawer({
               disabled={isPending}
               onClick={() => setIsOpen(false)}
               className="flex-1">
-              Cancel
+              {t("buttons.cancel")}
             </Button>
             <Button
               type="submit"
               disabled={isPending}
               className="flex-1 flex items-center justify-center gap-2">
               {isPending && <Spinner className="size-4" />}
-              <span>{isEditSession ? "Save Changes" : "Save Patient"}</span>
+              <span>
+                {isEditSession
+                  ? t("buttons.saveChanges")
+                  : t("buttons.savePatient")}
+              </span>
             </Button>
           </div>
         </form>

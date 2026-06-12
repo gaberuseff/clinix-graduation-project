@@ -1,8 +1,8 @@
+import {OnlineStatus} from "@/components/ownUI/online-status";
 import {Separator} from "@/components/ui/separator";
 import {SidebarTrigger} from "@/components/ui/sidebar";
-import {OnlineStatus} from "@/components/ownUI/online-status";
-import {ModeToggle} from "@/components/mode-toggle";
 import useUser from "@/features/auth/useUser";
+import LanguageSwitcher from "./ownUI/LanguageSwitcher";
 
 export function SiteHeader() {
   const {firstName} = useUser();
@@ -19,11 +19,10 @@ export function SiteHeader() {
           <h1 className="text-base font-medium">Good Day, {firstName}</h1>
         </div>
         <div className="flex items-center gap-3">
+          <LanguageSwitcher />
           <OnlineStatus />
-          <ModeToggle />
         </div>
       </div>
     </header>
   );
 }
-

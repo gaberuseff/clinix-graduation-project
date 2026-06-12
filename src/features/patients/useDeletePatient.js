@@ -2,16 +2,18 @@ import {deletePatient as deletePatientApi} from "@/services/apiPatients";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import {addToOfflineQueue} from "@/services/offlineSync";
+import {useAppTranslation} from "@/i18n/use-app-translation";
 
 function useDeletePatient() {
   const queryClient = useQueryClient();
+  const {t} = useAppTranslation("patients");
 
   const {mutateAsync: deletePatientMutation, isPending: isDeletingPatient} =
     useMutation({
       mutationFn: deletePatientApi,
       onSuccess: () => {
         queryClient.invalidateQueries({queryKey: ["patients"]});
-        toast.success("Patient Deleted Successfully", {id: "delete_patient"});
+        toast.success(t("toasts.deleteSuccess"), {id: "delete_patient"});
       },
     });
 
@@ -35,7 +37,7 @@ function useDeletePatient() {
       });
 
       toast.success(
-        "Offline: Patient deleted locally. Will sync when online.",
+        t("toasts.deleteOffline"),
         {
           id: "delete_patient_offline",
         },
@@ -66,7 +68,7 @@ function useDeletePatient() {
       if (isNetworkError) {
         await performOfflineDelete();
       } else {
-        toast.error(err.message || "Failed to delete patient", {
+        toast.error(err.message || t("toasts.deleteError"), {
           id: "delete_patient",
         });
       }

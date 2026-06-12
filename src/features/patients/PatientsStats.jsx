@@ -1,22 +1,26 @@
 import React from "react";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-} from "@/components/ui/card";
+import {Card, CardHeader, CardContent} from "@/components/ui/card";
+import {useAppTranslation} from "@/i18n/use-app-translation";
 
 function PatientsStats({patients, isLoadingPatients}) {
+  const {t} = useAppTranslation("patients");
+
   // Dynamic statistics calculations
   const totalPatients = patients?.length || 0;
   const maleCount = patients?.filter((p) => p.gender === "male")?.length || 0;
-  const femaleCount = patients?.filter((p) => p.gender === "female")?.length || 0;
+  const femaleCount =
+    patients?.filter((p) => p.gender === "female")?.length || 0;
 
   return (
     <div className="grid gap-4 grid-cols-1 sm:grid-cols-3">
       {/* Total Patients */}
-      <Card size="sm" className="bg-muted/20 dark:bg-muted/5 border-none shadow-none ring-1 ring-border/50">
+      <Card
+        size="sm"
+        className="bg-muted/20 dark:bg-muted/5 border-none shadow-none ring-1 ring-border/50">
         <CardHeader className="pb-2">
-          <span className="text-xs font-semibold text-muted-foreground tracking-wide">Total Patients</span>
+          <span className="text-xs font-semibold text-muted-foreground tracking-wide">
+            {t("stats.totalPatients")}
+          </span>
         </CardHeader>
         <CardContent className="flex items-baseline justify-between">
           <span className="text-2xl font-bold tracking-tight">
@@ -26,16 +30,20 @@ function PatientsStats({patients, isLoadingPatients}) {
               totalPatients
             )}
           </span>
-          <span className="text-[10px] text-muted-foreground font-medium">Registered</span>
+          <span className="text-[10px] text-muted-foreground font-medium">
+            {t("stats.registered")}
+          </span>
         </CardContent>
       </Card>
 
       {/* Male Patients */}
-      <Card size="sm" className="bg-muted/20 dark:bg-muted/5 border-none shadow-none ring-1 ring-border/50">
+      <Card
+        size="sm"
+        className="bg-muted/20 dark:bg-muted/5 border-none shadow-none ring-1 ring-border/50">
         <CardHeader className="pb-2">
           <span className="text-xs font-semibold text-muted-foreground tracking-wide flex items-center gap-1.5">
             <span className="size-2 rounded-full bg-blue-500" />
-            Male Patients
+            {t("stats.malePatients")}
           </span>
         </CardHeader>
         <CardContent className="flex items-baseline justify-between">
@@ -47,17 +55,22 @@ function PatientsStats({patients, isLoadingPatients}) {
             )}
           </span>
           <span className="text-[10px] text-muted-foreground font-medium">
-            {totalPatients > 0 ? `${Math.round((maleCount / totalPatients) * 100)}%` : "0%"} of total
+            {totalPatients > 0
+              ? `${Math.round((maleCount / totalPatients) * 100)}%`
+              : "0%"}{" "}
+            {t("stats.ofTotal")}
           </span>
         </CardContent>
       </Card>
 
       {/* Female Patients */}
-      <Card size="sm" className="bg-muted/20 dark:bg-muted/5 border-none shadow-none ring-1 ring-border/50">
+      <Card
+        size="sm"
+        className="bg-muted/20 dark:bg-muted/5 border-none shadow-none ring-1 ring-border/50">
         <CardHeader className="pb-2">
           <span className="text-xs font-semibold text-muted-foreground tracking-wide flex items-center gap-1.5">
             <span className="size-2 rounded-full bg-pink-500" />
-            Female Patients
+            {t("stats.femalePatients")}
           </span>
         </CardHeader>
         <CardContent className="flex items-baseline justify-between">
@@ -69,7 +82,10 @@ function PatientsStats({patients, isLoadingPatients}) {
             )}
           </span>
           <span className="text-[10px] text-muted-foreground font-medium">
-            {totalPatients > 0 ? `${Math.round((femaleCount / totalPatients) * 100)}%` : "0%"} of total
+            {totalPatients > 0
+              ? `${Math.round((femaleCount / totalPatients) * 100)}%`
+              : "0%"}{" "}
+            {t("stats.ofTotal")}
           </span>
         </CardContent>
       </Card>

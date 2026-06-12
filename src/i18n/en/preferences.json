@@ -1,0 +1,17 @@
+{
+  "title": "Preferences",
+  "subtitle": "Customize your application experience, themes, and language settings.",
+  "theme": {
+    "title": "Theme & Appearance",
+    "description": "Select how Clinix looks on your screen.",
+    "light": "Light Mode",
+    "dark": "Dark Mode",
+    "system": "System Default"
+  },
+  "language": {
+    "title": "Language Settings",
+    "description": "Choose your preferred interface language.",
+    "en": "English",
+    "ar": "العربية"
+  }
+}

@@ -31,6 +31,7 @@ import {
 } from "@remixicon/react";
 import {useState} from "react";
 import CreatePatientDrawer from "./CreatePatientDrawer";
+import {useAppTranslation} from "@/i18n/use-app-translation";
 
 function PatientsTable() {
   const {patients, count, isLoadingPatients, isError, error} = usePatients();
@@ -39,6 +40,7 @@ function PatientsTable() {
   const [patientToEdit, setPatientToEdit] = useState(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [patientToDelete, setPatientToDelete] = useState(null);
+  const {t} = useAppTranslation("patients");
 
   if (isLoadingPatients) {
     return <TableSkeleton rows={5} columns={5} />;
@@ -98,19 +100,19 @@ function PatientsTable() {
             <TableHeader className="bg-muted/40">
               <TableRow className="border-b border-border/40 hover:bg-transparent">
                 <TableHead className="text-left font-bold text-foreground/80 py-4 pl-6">
-                  Patient Name
+                  {t("table.columns.name")}
                 </TableHead>
                 <TableHead className="text-left font-bold text-foreground/80 py-4">
-                  Birth Year
+                  {t("table.columns.birth_year")}
                 </TableHead>
                 <TableHead className="text-left font-bold text-foreground/80 py-4">
-                  Phone Number
+                  {t("table.columns.phone")}
                 </TableHead>
                 <TableHead className="text-left font-bold text-foreground/80 py-4">
-                  Gender
+                  {t("table.columns.gender")}
                 </TableHead>
                 <TableHead className="text-right font-bold text-foreground/80 py-4 pr-6">
-                  Actions
+                  {t("table.columns.actions")}
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -166,7 +168,7 @@ function PatientsTable() {
                           onClick={() => handleEdit(patient)}
                           className="gap-2">
                           <RiEdit2Line className="size-4 text-muted-foreground" />
-                          <span>Edit</span>
+                          <span>{t("buttons.edit")}</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() => handleDeleteClick(patient)}
@@ -174,7 +176,7 @@ function PatientsTable() {
                           variant="destructive"
                           className="gap-2 text-destructive">
                           <RiDeleteBinLine className="size-4" />
-                          <span>Delete</span>
+                          <span>{t("buttons.delete")}</span>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -203,8 +205,8 @@ function PatientsTable() {
         }}
         onConfirm={handleConfirmDelete}
         itemName={patientToDelete?.name}
-        title="Delete Patient"
-        description="Are you sure you want to delete this patient record?"
+        title={t("buttons.delete")}
+        description={t("modal.delete.desc")}
         isDeleting={isDeletingPatient}
       />
     </>

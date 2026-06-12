@@ -1,8 +1,8 @@
+import {TooltipProvider} from "@/components/ui/tooltip";
 import {Outlet} from "react-router-dom";
 import {AppSidebar} from "../app-sidebar";
 import {SiteHeader} from "../site-header";
 import {SidebarInset, SidebarProvider} from "../ui/sidebar";
-import {TooltipProvider} from "@/components/ui/tooltip";
 
 function AppLayout() {
   return (
