@@ -1,0 +1,24 @@
+{
+  "brand": "Clinix.",
+  "nav": {
+    "dashboard": "Dashboard",
+    "appointments": "Appointments",
+    "patients": "Patients",
+    "secretaries": "Secretaries",
+    "discounts": "Discount Codes",
+    "settings": "Settings",
+    "help": "Get Help",
+    "preferences": "Preferences"
+  },
+  "userMenu": {
+    "loading": "Loading...",
+    "account": "Account",
+    "registerPasskey": "Register Passkey",
+    "billing": "Billing",
+    "notifications": "Notifications",
+    "logout": "Log out"
+  },
+  "header": {
+    "greeting": "Good Day, {{name}}"
+  }
+}

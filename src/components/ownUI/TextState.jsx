@@ -1,6 +1,6 @@
 import {RiInboxLine} from "@remixicon/react";
 
-export function EmptyState({
+export function TextState({
   title = "No data available",
   description = "There are no records to display at the moment.",
   icon: Icon = RiInboxLine,
@@ -22,4 +22,4 @@ export function EmptyState({
   );
 }
 
-export default EmptyState;
+export default TextState;

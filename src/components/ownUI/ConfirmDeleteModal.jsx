@@ -29,7 +29,7 @@ function ConfirmDeleteModal({
       <DrawerContent className="max-w-md mx-auto">
         <div className="mx-auto w-full p-6 pb-8 flex flex-col gap-6">
           {/* Header with Alert Icon */}
-          <div className="flex gap-4 items-start text-left">
+          <div className="flex gap-4 items-start text-start">
             <div className="w-12 h-12 shrink-0 rounded-2xl bg-destructive/10 text-destructive flex items-center justify-center">
               <RiAlertLine className="size-5" />
             </div>

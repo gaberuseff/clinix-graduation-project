@@ -76,5 +76,15 @@
     "deleteSuccess": "Patient Deleted Successfully",
     "deleteOffline": "Offline: Patient deleted locally. Will sync when online.",
     "deleteError": "Failed to delete patient"
+  },
+  "states": {
+    "error": {
+      "title": "Failed to Load Patients",
+      "description": "Something went wrong while fetching patient records."
+    },
+    "empty": {
+      "title": "No Patients Registered",
+      "description": "No registered patients found for this clinic at the moment."
+    }
   }
 }

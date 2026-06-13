@@ -11,16 +11,16 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import useUser from "@/features/auth/useUser";
+import {useAppTranslation} from "@/i18n/use-app-translation";
 import {
   RiCalendarEventLine,
-  RiCommandLine,
   RiDashboardLine,
   RiPercentLine,
   RiQuestionLine,
   RiSettingsLine,
   RiShieldUserLine,
-  RiUserSettingsLine,
   RiUserHeartLine,
+  RiUserSettingsLine,
 } from "@remixicon/react";
 import {Link} from "react-router-dom";
 
@@ -28,31 +28,37 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
+      titleKey: "dashboard",
       url: "/dashboard",
       icon: <RiDashboardLine />,
     },
     {
       title: "Appointments",
+      titleKey: "appointments",
       url: "/appointments",
       icon: <RiCalendarEventLine />,
     },
     {
       title: "Patients",
+      titleKey: "patients",
       url: "/patients",
       icon: <RiUserHeartLine />,
     },
     {
       title: "Secretaries",
+      titleKey: "secretaries",
       url: "/secretaries",
       icon: <RiShieldUserLine />,
     },
     {
       title: "Discount Codes",
+      titleKey: "discounts",
       url: "/discounts",
       icon: <RiPercentLine />,
     },
     {
       title: "Settings",
+      titleKey: "settings",
       url: "/settings",
       icon: <RiSettingsLine />,
     },
@@ -60,11 +66,13 @@ const data = {
   navSecondary: [
     {
       title: "Get Help",
+      titleKey: "help",
       url: "/help",
       icon: <RiQuestionLine />,
     },
     {
       title: "Preferences",
+      titleKey: "preferences",
       url: "/preferences",
       icon: <RiUserSettingsLine />,
     },
@@ -73,6 +81,7 @@ const data = {
 
 export function AppSidebar({...props}) {
   const {user: rawUser} = useUser();
+  const {t, i18n} = useAppTranslation("dashboard");
 
   const user = rawUser
     ? {
@@ -80,21 +89,23 @@ export function AppSidebar({...props}) {
         email: rawUser.email,
       }
     : {
-        name: "Loading...",
+        name: t("userMenu.loading"),
         email: "...",
       };
 
+  const activeSide = props.side || (i18n.language === "ar" ? "right" : "left");
+
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
+    <Sidebar collapsible="offcanvas" side={activeSide} {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:p-1.5!">
+              className="data-[slot=sidebar-menu-button]:p-1.5!"
+              dir="ltr">
               <Link to="/">
-                <RiCommandLine className="size-5!" />
-                <span className="text-base font-semibold">Clinix.</span>
+                <span className="text-base font-semibold">Eyan.</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

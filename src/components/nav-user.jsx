@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 import useLogout from "@/features/auth/useLogout";
 import useRegisterPasskey from "@/features/auth/useRegisterPasskey";
+import {useAppTranslation} from "@/i18n/use-app-translation";
 import {
   RiMore2Line,
   RiUserLine,
@@ -29,6 +30,7 @@ export function NavUser({user}) {
   const {logout, isLoggingOut} = useLogout();
   const {registerPasskey, isRegistering} = useRegisterPasskey();
   const {isMobile} = useSidebar();
+  const {t} = useAppTranslation("dashboard");
 
   return (
     <SidebarMenu>
@@ -38,13 +40,13 @@ export function NavUser({user}) {
             <SidebarMenuButton
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
-              <div className="grid flex-1 text-left text-sm leading-tight">
+              <div className="grid flex-1 text-start text-sm leading-tight">
                 <span className="truncate font-medium">{user?.name}</span>
                 <span className="truncate text-xs text-muted-foreground">
                   {user?.email}
                 </span>
               </div>
-              <RiMore2Line className="ml-auto size-4" />
+              <RiMore2Line className="ms-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -53,8 +55,8 @@ export function NavUser({user}) {
             align="end"
             sideOffset={4}>
             <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <div className="grid flex-1 text-left text-sm leading-tight">
+              <div className="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
+                <div className="grid flex-1 text-start text-sm leading-tight">
                   <span className="truncate font-medium">{user?.name}</span>
                   <span className="truncate text-xs text-muted-foreground">
                     {user?.email}
@@ -66,28 +68,28 @@ export function NavUser({user}) {
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <RiUserLine />
-                Account
+                {t("userMenu.account")}
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={registerPasskey}
                 disabled={isRegistering}>
                 <RiKey2Line />
-                Register Passkey
-                {isRegistering && <Spinner className="size-3.5 ml-auto" />}
+                {t("userMenu.registerPasskey")}
+                {isRegistering && <Spinner className="size-3.5 ms-auto" />}
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <RiBankCardLine />
-                Billing
+                {t("userMenu.billing")}
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <RiNotification3Line />
-                Notifications
+                {t("userMenu.notifications")}
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logout}>
               <RiLogoutBoxLine />
-              Log out
+              {t("userMenu.logout")}
               {isLoggingOut && <Spinner />}
             </DropdownMenuItem>
           </DropdownMenuContent>

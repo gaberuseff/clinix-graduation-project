@@ -1,0 +1,24 @@
+{
+  "brand": "كلينكس.",
+  "nav": {
+    "dashboard": "لوحة القيادة",
+    "appointments": "المواعيد",
+    "patients": "المرضى",
+    "secretaries": "السكرتارية",
+    "discounts": "أكواد الخصم",
+    "settings": "الإعدادات",
+    "help": "المساعدة",
+    "preferences": "التفضيلات"
+  },
+  "userMenu": {
+    "loading": "جاري التحميل...",
+    "account": "الحساب",
+    "registerPasskey": "تسجيل مفتاح المرور",
+    "billing": "الفواتير",
+    "notifications": "الإشعارات",
+    "logout": "تسجيل الخروج"
+  },
+  "header": {
+    "greeting": "يومك سعيد، {{name}}"
+  }
+}

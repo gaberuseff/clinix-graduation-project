@@ -1,12 +1,12 @@
-import {QueryClient} from "@tanstack/react-query";
-import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
-import {PersistQueryClientProvider} from "@tanstack/react-query-persist-client";
-import {del, get, set} from "idb-keyval";
-import {ThemeProvider} from "next-themes";
-import {Toaster} from "react-hot-toast";
+import { QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
+import { del, get, set } from "idb-keyval";
+import { ThemeProvider } from "next-themes";
+import { Toaster } from "react-hot-toast";
 import AppRoutes from "./AppRoutes";
 import useOfflineSync from "./hooks/useOfflineSync";
-import {LanguageProvider} from "./providers/language-provider";
+import { LanguageProvider } from "./providers/language-provider";
 
 // 1. إعداد الـ Query Client مع إعدادات الـ Offline للـ Mutations
 const queryClient = new QueryClient({
@@ -50,9 +50,9 @@ function App() {
           maxAge: 1000 * 60 * 60 * 24, // 24 hours
         }}>
         <OfflineSyncInitializer />
-        {/* <LanguageProvider> */}
-        <AppRoutes />
-        {/* </LanguageProvider> */}
+        <LanguageProvider>
+          <AppRoutes />
+        </LanguageProvider>
         <ReactQueryDevtools
           initialIsOpen={false}
           buttonPosition="bottom-right"

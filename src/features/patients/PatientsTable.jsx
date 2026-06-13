@@ -1,7 +1,7 @@
 import ConfirmDeleteModal from "@/components/ownUI/ConfirmDeleteModal";
-import EmptyState from "@/components/ownUI/EmptyState";
 import {Pagination} from "@/components/ownUI/Pagination";
 import TableSkeleton from "@/components/ownUI/TableSkeleton";
+import {TextState} from "@/components/ownUI/TextState";
 import {Badge} from "@/components/ui/badge";
 import {Button} from "@/components/ui/button";
 import {
@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/table";
 import useDeletePatient from "@/features/patients/useDeletePatient";
 import usePatients from "@/features/patients/usePatients";
+import {useAppTranslation} from "@/i18n/use-app-translation";
 import {
   RiAlertLine,
   RiCalendarEventLine,
@@ -31,7 +32,6 @@ import {
 } from "@remixicon/react";
 import {useState} from "react";
 import CreatePatientDrawer from "./CreatePatientDrawer";
-import {useAppTranslation} from "@/i18n/use-app-translation";
 
 function PatientsTable() {
   const {patients, count, isLoadingPatients, isError, error} = usePatients();
@@ -48,12 +48,9 @@ function PatientsTable() {
 
   if (isError) {
     return (
-      <EmptyState
-        title="Failed to Load Patients"
-        description={
-          error?.message ||
-          "Something went wrong while fetching patient records."
-        }
+      <TextState
+        title={t("states.error.title")}
+        description={error?.message || t("states.error.description")}
         icon={RiAlertLine}
       />
     );
@@ -61,9 +58,9 @@ function PatientsTable() {
 
   if (!patients || patients.length === 0) {
     return (
-      <EmptyState
-        title="No Patients Registered"
-        description="No registered patients found for this clinic at the moment."
+      <TextState
+        title={t("states.empty.title")}
+        description={t("states.empty.description")}
         icon={RiUser3Line}
       />
     );
@@ -96,22 +93,22 @@ function PatientsTable() {
     <>
       <div className="w-full overflow-hidden rounded-xl border">
         <div className="overflow-x-auto w-full">
-          <Table dir="ltr" className="w-full text-left border-collapse">
+          <Table className="w-full text-start border-collapse">
             <TableHeader className="bg-muted/40">
               <TableRow className="border-b border-border/40 hover:bg-transparent">
-                <TableHead className="text-left font-bold text-foreground/80 py-4 pl-6">
+                <TableHead className="text-start font-bold text-foreground/80 py-2.5 ps-4">
                   {t("table.columns.name")}
                 </TableHead>
-                <TableHead className="text-left font-bold text-foreground/80 py-4">
+                <TableHead className="text-start font-bold text-foreground/80 py-2.5">
                   {t("table.columns.birth_year")}
                 </TableHead>
-                <TableHead className="text-left font-bold text-foreground/80 py-4">
+                <TableHead className="text-start font-bold text-foreground/80 py-2.5">
                   {t("table.columns.phone")}
                 </TableHead>
-                <TableHead className="text-left font-bold text-foreground/80 py-4">
+                <TableHead className="text-start font-bold text-foreground/80 py-2.5">
                   {t("table.columns.gender")}
                 </TableHead>
-                <TableHead className="text-right font-bold text-foreground/80 py-4 pr-6">
+                <TableHead className="text-end font-bold text-foreground/80 py-2.5 pe-4">
                   {t("table.columns.actions")}
                 </TableHead>
               </TableRow>
@@ -121,20 +118,20 @@ function PatientsTable() {
                 <TableRow
                   key={patient.id}
                   className="border-b border-border/25">
-                  <TableCell className="py-4 pl-6 font-semibold text-foreground/90 font-sans ">
+                  <TableCell className="py-2.5 ps-4 font-semibold text-foreground/90 font-sans ">
                     <div className="flex items-center gap-2.5">
                       <span className="capitalize">{patient.name}</span>
                     </div>
                   </TableCell>
 
-                  <TableCell className="py-4 text-muted-foreground font-medium font-sans">
+                  <TableCell className="py-2.5 text-muted-foreground font-medium font-sans">
                     <div className="flex items-center gap-1.5">
                       <RiCalendarEventLine className="size-4 text-muted-foreground/60" />
                       <span>{patient.birth_year || "—"}</span>
                     </div>
                   </TableCell>
 
-                  <TableCell className="py-4">
+                  <TableCell className="py-2.5">
                     <span
                       dir="ltr"
                       className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-muted-foreground">
@@ -143,7 +140,7 @@ function PatientsTable() {
                     </span>
                   </TableCell>
 
-                  <TableCell className="py-4">
+                  <TableCell className="py-2.5">
                     <Badge
                       variant="secondary"
                       className={`font-semibold text-xs px-3 py-1 rounded-lg border ${
@@ -155,7 +152,7 @@ function PatientsTable() {
                     </Badge>
                   </TableCell>
 
-                  <TableCell className="py-4 pr-6 text-right">
+                  <TableCell className="py-2.5 pe-4 text-end">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button variant="ghost" size="icon" className="h-8 w-8">

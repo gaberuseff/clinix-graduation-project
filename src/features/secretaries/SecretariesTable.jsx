@@ -1,5 +1,14 @@
-import EmptyState from "@/components/ownUI/EmptyState";
+import ConfirmDeleteModal from "@/components/ownUI/ConfirmDeleteModal";
 import TableSkeleton from "@/components/ownUI/TableSkeleton";
+import { TextState } from "@/components/ownUI/TextState";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -9,27 +18,18 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {Button} from "@/components/ui/button";
-import {Badge} from "@/components/ui/badge";
-import ConfirmDeleteModal from "@/components/ownUI/ConfirmDeleteModal";
-import useSecretaries from "./useSecretaries";
-import {useUpdateSecretary} from "./useUpdateSecretary";
-import {useState} from "react";
-import {
-  RiPhoneLine,
-  RiMailLine,
-  RiUser3Line,
   RiAlertLine,
-  RiMoreLine,
+  RiCheckboxCircleLine,
   RiDeleteBinLine,
   RiForbidLine,
-  RiCheckboxCircleLine,
+  RiMailLine,
+  RiMoreLine,
+  RiPhoneLine,
+  RiUser3Line,
 } from "@remixicon/react";
+import { useState } from "react";
+import useSecretaries from "./useSecretaries";
+import { useUpdateSecretary } from "./useUpdateSecretary";
 
 function SecretariesTable() {
   const {secretaries, isLoadingSecretaries, isError, error} = useSecretaries();
@@ -44,7 +44,7 @@ function SecretariesTable() {
 
   if (isError) {
     return (
-      <EmptyState
+      <TextState
         title="Failed to Load Secretaries"
         description={
           error?.message ||
@@ -57,7 +57,7 @@ function SecretariesTable() {
 
   if (!secretaries || secretaries.length === 0) {
     return (
-      <EmptyState
+      <TextState
         title="No Secretaries Registered"
         description="No registered secretaries found for this clinic at the moment."
         icon={RiUser3Line}
@@ -92,22 +92,22 @@ function SecretariesTable() {
     <>
       <div className="w-full overflow-hidden rounded-xl border">
         <div className="overflow-x-auto w-full">
-          <Table dir="ltr" className="w-full text-left border-collapse">
+          <Table className="w-full text-start border-collapse">
             <TableHeader className="bg-muted/40">
               <TableRow className="border-b border-border/40 hover:bg-transparent">
-                <TableHead className="text-left font-bold text-foreground/80 py-4 pl-6">
+                <TableHead className="text-start font-bold text-foreground/80 py-2.5 ps-4">
                   Full Name
                 </TableHead>
-                <TableHead className="text-left font-bold text-foreground/80 py-4">
+                <TableHead className="text-start font-bold text-foreground/80 py-2.5">
                   Email Address
                 </TableHead>
-                <TableHead className="text-left font-bold text-foreground/80 py-4">
+                <TableHead className="text-start font-bold text-foreground/80 py-2.5">
                   Phone Number
                 </TableHead>
-                <TableHead className="text-left font-bold text-foreground/80 py-4">
+                <TableHead className="text-start font-bold text-foreground/80 py-2.5">
                   Status
                 </TableHead>
-                <TableHead className="text-right font-bold text-foreground/80 py-4 pr-6">
+                <TableHead className="text-end font-bold text-foreground/80 py-2.5 pe-4">
                   Actions
                 </TableHead>
               </TableRow>
@@ -117,7 +117,7 @@ function SecretariesTable() {
                 <TableRow
                   key={secretary.id}
                   className="border-b border-border/25">
-                  <TableCell className="py-4 pl-6 font-semibold text-foreground/90 font-sans">
+                  <TableCell className="py-2.5 ps-4 font-semibold text-foreground/90 font-sans">
                     <div className="flex items-center gap-2.5">
                       <span className="capitalize">
                         {secretary.full_name || "—"}
@@ -125,14 +125,14 @@ function SecretariesTable() {
                     </div>
                   </TableCell>
 
-                  <TableCell className="py-4 text-muted-foreground font-medium font-sans">
+                  <TableCell className="py-2.5 text-muted-foreground font-medium font-sans">
                     <div className="flex items-center gap-1.5">
                       <RiMailLine className="size-4 text-muted-foreground/60" />
                       <span>{secretary.email || "—"}</span>
                     </div>
                   </TableCell>
 
-                  <TableCell className="py-4">
+                  <TableCell className="py-2.5">
                     <span
                       dir="ltr"
                       className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-muted-foreground">
@@ -141,7 +141,7 @@ function SecretariesTable() {
                     </span>
                   </TableCell>
 
-                  <TableCell className="py-4">
+                  <TableCell className="py-2.5">
                     <Badge
                       variant="secondary"
                       className={`font-semibold text-xs px-3 py-1 rounded-lg border ${
@@ -153,7 +153,7 @@ function SecretariesTable() {
                     </Badge>
                   </TableCell>
 
-                  <TableCell className="py-4 pr-6 text-right">
+                  <TableCell className="py-2.5 pe-4 text-end">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button
