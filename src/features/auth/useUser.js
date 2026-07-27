@@ -10,6 +10,7 @@ function useUser() {
   const firstName = user?.user_metadata?.full_name.split(" ")[0];
   const isAuthenticated = user?.role === "authenticated";
   const clinic_id = user?.user_metadata?.clinic_id;
+  const role = user?.user_metadata?.role;
 
   return {
     user,
@@ -17,6 +18,7 @@ function useUser() {
     isAuthenticated,
     firstName,
     clinic_id,
+    role,
   };
 }
 

@@ -2,8 +2,8 @@ import {Navigate, Outlet, useLocation} from "react-router-dom";
 import useUser from "../../features/auth/useUser";
 import {Spinner} from "../ui/spinner";
 
-function ProtectedRoutes() {
-  const {isAuthenticated, isPending} = useUser();
+function ProtectedRoutes({allowedRoles}) {
+  const {isAuthenticated, isPending, role} = useUser();
   const location = useLocation();
 
   if (isPending) {
@@ -14,11 +14,23 @@ function ProtectedRoutes() {
     );
   }
 
-  return isAuthenticated ? (
-    <Outlet />
-  ) : (
-    <Navigate to="/login" state={{from: location}} replace />
-  );
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{from: location}} replace />;
+  }
+
+  const hasPermission = allowedRoles.includes(role);
+
+  if (!hasPermission) {
+    if (role === "doctor") {
+      return <Navigate to="/doctor/dashboard" replace />;
+    }
+    if (role === "secretary") {
+      return <Navigate to="/secretary/dashboard" replace />;
+    }
+    return <Navigate to="/login" replace />;
+  }
+
+  return <Outlet />;
 }
 
 export default ProtectedRoutes;

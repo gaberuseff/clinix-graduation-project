@@ -6,6 +6,8 @@ import preferencesEn from "./en/preferences.json";
 import preferencesAr from "./ar/preferences.json";
 import dashboardEn from "./en/dashboard.json";
 import dashboardAr from "./ar/dashboard.json";
+import appointmentsEn from "./en/appointments.json";
+import appointmentsAr from "./ar/appointments.json";
 
 const savedLanguage =
   typeof window !== "undefined"
@@ -18,12 +20,14 @@ i18n.use(initReactI18next).init({
       patients: patientsEn,
       preferences: preferencesEn,
       dashboard: dashboardEn,
+      appointments: appointmentsEn,
     },
 
     ar: {
       patients: patientsAr,
       preferences: preferencesAr,
       dashboard: dashboardAr,
+      appointments: appointmentsAr,
     },
   },
 

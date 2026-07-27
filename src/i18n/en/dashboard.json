@@ -8,7 +8,14 @@
     "discounts": "Discount Codes",
     "settings": "Settings",
     "help": "Get Help",
-    "preferences": "Preferences"
+    "preferences": "Preferences",
+    "visits": "Visits",
+    "prescriptions": "Prescriptions Archive",
+    "finance": "Finance & Reports",
+    "booking": "Book Appointment",
+    "queue": "Waiting Queue",
+    "payments": "Payments & Treasury",
+    "secretary": "Secretary"
   },
   "userMenu": {
     "loading": "Loading...",

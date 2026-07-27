@@ -65,7 +65,7 @@ Deno.serve(async (req) => {
         user_metadata: {
           full_name: name,
           phone,
-          role: 'SECRETARY',
+          role: 'secretary',
           clinic_id,
         },
       })

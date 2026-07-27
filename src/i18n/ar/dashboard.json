@@ -8,7 +8,14 @@
     "discounts": "أكواد الخصم",
     "settings": "الإعدادات",
     "help": "المساعدة",
-    "preferences": "التفضيلات"
+    "preferences": "التفضيلات",
+    "visits": "الكشوفات",
+    "prescriptions": "أرشيف الروشتات",
+    "finance": "المالية والتقارير",
+    "booking": "حجز موعد",
+    "queue": "طابور الانتظار",
+    "payments": "الخزينة والمدفوعات",
+    "secretary": "السكرتارية"
   },
   "userMenu": {
     "loading": "جاري التحميل...",

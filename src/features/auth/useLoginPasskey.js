@@ -12,7 +12,10 @@ function useLoginPasskey() {
 
     onSuccess: (data) => {
       queryClient.setQueryData(["user"], data?.user);
-      navigate("/dashboard", {replace: true});
+      const role = data?.user?.user_metadata?.role;
+      const redirectPath =
+        role === "secretary" ? "/secretary/dashboard" : "/doctor/dashboard";
+      navigate(redirectPath, {replace: true});
       toast.success("Logged in securely with Passkey");
     },
 

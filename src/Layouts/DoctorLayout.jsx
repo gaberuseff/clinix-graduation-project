@@ -1,10 +1,10 @@
+import {SidebarInset, SidebarProvider} from "@/components/ui/sidebar";
 import {TooltipProvider} from "@/components/ui/tooltip";
 import {Outlet} from "react-router-dom";
-import {AppSidebar} from "../app-sidebar";
-import {SiteHeader} from "../site-header";
-import {SidebarInset, SidebarProvider} from "../ui/sidebar";
+import {AppSidebar} from "@/components/app-sidebar";
+import {SiteHeader} from "@/components/site-header";
 
-function AppLayout() {
+function DoctorLayout() {
   return (
     <SidebarProvider
       style={{
@@ -24,4 +24,4 @@ function AppLayout() {
   );
 }
 
-export default AppLayout;
+export default DoctorLayout;

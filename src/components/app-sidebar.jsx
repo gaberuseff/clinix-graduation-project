@@ -12,76 +12,35 @@ import {
 } from "@/components/ui/sidebar";
 import useUser from "@/features/auth/useUser";
 import {useAppTranslation} from "@/i18n/use-app-translation";
-import {
-  RiCalendarEventLine,
-  RiDashboardLine,
-  RiPercentLine,
-  RiQuestionLine,
-  RiSettingsLine,
-  RiShieldUserLine,
-  RiUserHeartLine,
-  RiUserSettingsLine,
-} from "@remixicon/react";
+import {RiUserSettingsLine} from "@remixicon/react";
 import {Link} from "react-router-dom";
+import {doctorNavLinks, receptionistNavLinks} from "@/config/navigation";
 
-const data = {
-  navMain: [
-    {
-      title: "Dashboard",
-      titleKey: "dashboard",
-      url: "/dashboard",
-      icon: <RiDashboardLine />,
-    },
-    {
-      title: "Appointments",
-      titleKey: "appointments",
-      url: "/appointments",
-      icon: <RiCalendarEventLine />,
-    },
-    {
-      title: "Patients",
-      titleKey: "patients",
-      url: "/patients",
-      icon: <RiUserHeartLine />,
-    },
-    {
-      title: "Secretaries",
-      titleKey: "secretaries",
-      url: "/secretaries",
-      icon: <RiShieldUserLine />,
-    },
-    {
-      title: "Discount Codes",
-      titleKey: "discounts",
-      url: "/discounts",
-      icon: <RiPercentLine />,
-    },
-    {
-      title: "Settings",
-      titleKey: "settings",
-      url: "/settings",
-      icon: <RiSettingsLine />,
-    },
-  ],
-  navSecondary: [
-    {
-      title: "Get Help",
-      titleKey: "help",
-      url: "/help",
-      icon: <RiQuestionLine />,
-    },
-    {
-      title: "Preferences",
-      titleKey: "preferences",
-      url: "/preferences",
-      icon: <RiUserSettingsLine />,
-    },
-  ],
-};
+const secondaryItems = [
+  {
+    title: "Preferences",
+    titleKey: "preferences",
+    url: "/preferences",
+    icon: <RiUserSettingsLine />,
+  },
+];
 
 export function AppSidebar({...props}) {
-  const {user: rawUser} = useUser();
+  const {user: rawUser, role: userRole} = useUser();
   const {t, i18n} = useAppTranslation("dashboard");
+
+  const rawLinks =
+    userRole === "secretary" ? receptionistNavLinks : doctorNavLinks;
+
+  const mappedNavMain = rawLinks.map((link) => {
+    const IconComponent = link.icon;
+    return {
+      title: link.title,
+      titleKey: link.titleKey,
+      url: link.path,
+      icon: IconComponent ? <IconComponent className="size-4" /> : null,
+    };
+  });
 
   const user = rawUser
     ? {
@@ -112,8 +71,8 @@ export function AppSidebar({...props}) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavMain items={mappedNavMain} />
+        <NavSecondary items={secondaryItems} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={user} />
