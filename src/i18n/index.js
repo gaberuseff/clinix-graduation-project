@@ -8,6 +8,10 @@ import dashboardEn from "./en/dashboard.json";
 import dashboardAr from "./ar/dashboard.json";
 import appointmentsEn from "./en/appointments.json";
 import appointmentsAr from "./ar/appointments.json";
+import secretariesEn from "./en/secretaries.json";
+import secretariesAr from "./ar/secretaries.json";
+import settingsEn from "./en/settings.json";
+import settingsAr from "./ar/settings.json";
 
 const savedLanguage =
   typeof window !== "undefined"
@@ -21,6 +25,8 @@ i18n.use(initReactI18next).init({
       preferences: preferencesEn,
       dashboard: dashboardEn,
       appointments: appointmentsEn,
+      secretaries: secretariesEn,
+      settings: settingsEn,
     },
 
     ar: {
@@ -28,6 +34,8 @@ i18n.use(initReactI18next).init({
       preferences: preferencesAr,
       dashboard: dashboardAr,
       appointments: appointmentsAr,
+      secretaries: secretariesAr,
+      settings: settingsAr,
     },
   },
 

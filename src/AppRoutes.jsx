@@ -5,6 +5,7 @@ import {Spinner} from "./components/ui/spinner";
 import PublicLayout from "./features/public/PublicLayout";
 import DoctorLayout from "./Layouts/DoctorLayout";
 import SecretaryLayout from "./Layouts/SecretaryLayout";
+import {PATHS, PATH_SEGMENTS} from "@/config/paths";
 
 // Lazy-loaded pages (Code-Splitting)
 const Appointments = lazy(() => import("./pages/Appointments"));
@@ -32,38 +33,63 @@ function AppRoutes() {
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route element={<PublicLayout />}>
-            <Route path="/" element={<h1>Hello</h1>} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path={PATHS.root} element={<h1>Hello</h1>} />
+            <Route path={PATHS.login} element={<Login />} />
+            <Route path={PATHS.register} element={<Register />} />
           </Route>
 
           <Route element={<ProtectedRoutes allowedRoles={["doctor"]} />}>
-            <Route path="/doctor" element={<DoctorLayout />}>
-              <Route index element={<Navigate to="dashboard" replace />} />
-              <Route path="dashboard" element={<h1>Doctor Dashboard</h1>} />
-              <Route path="patients" element={<Patients />} />
-              <Route path="secretary" element={<Secretaries />} />
+            <Route path={PATHS.doctor.root} element={<DoctorLayout />}>
               <Route
-                path="patients/:patientId"
+                index
+                element={<Navigate to={PATH_SEGMENTS.dashboard} replace />}
+              />
+              <Route
+                path={PATH_SEGMENTS.dashboard}
+                element={<h1>Doctor Dashboard</h1>}
+              />
+              <Route path={PATH_SEGMENTS.patients} element={<Patients />} />
+              <Route path={PATH_SEGMENTS.secretary} element={<Secretaries />} />
+              <Route
+                path={PATH_SEGMENTS.patientDetails}
                 element={<h1>Patient Details</h1>}
               />
-              <Route path="visits" element={<Visits />} />
-              <Route path="finance" element={<h1>Doctor Finance</h1>} />
-              <Route path="settings" element={<Settings />} />
+              <Route path={PATH_SEGMENTS.visits} element={<Visits />} />
+              <Route
+                path={PATH_SEGMENTS.finance}
+                element={<h1>Doctor Finance</h1>}
+              />
+              <Route path={PATH_SEGMENTS.settings} element={<Settings />} />
+              <Route
+                path={PATH_SEGMENTS.preferences}
+                element={<Preferences />}
+              />
             </Route>
           </Route>
 
           <Route element={<ProtectedRoutes allowedRoles={["secretary"]} />}>
-            <Route path="/secretary" element={<SecretaryLayout />}>
-              <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path={PATHS.secretary.root} element={<SecretaryLayout />}>
               <Route
-                path="dashboard"
+                index
+                element={<Navigate to={PATH_SEGMENTS.dashboard} replace />}
+              />
+              <Route
+                path={PATH_SEGMENTS.dashboard}
                 element={<h1>Receptionist Dashboard</h1>}
               />
-              <Route path="appointments" element={<Appointments />} />
-              <Route path="patients" element={<Patients />} />
-              <Route path="payments" element={<h1>Daily Payments</h1>} />
-              <Route path="preferences" element={<Preferences />} />
+              <Route
+                path={PATH_SEGMENTS.appointments}
+                element={<Appointments />}
+              />
+              <Route path={PATH_SEGMENTS.patients} element={<Patients />} />
+              <Route
+                path={PATH_SEGMENTS.payments}
+                element={<h1>Daily Payments</h1>}
+              />
+              <Route
+                path={PATH_SEGMENTS.preferences}
+                element={<Preferences />}
+              />
             </Route>
           </Route>
 

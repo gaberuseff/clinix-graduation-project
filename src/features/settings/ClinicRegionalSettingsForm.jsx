@@ -20,8 +20,10 @@ import {useEffect} from "react";
 import {Controller, useForm} from "react-hook-form";
 import useClinicSettings from "./useClinicSettings";
 import useUpdateClinicSettings from "./useUpdateClinicSettings";
+import {useAppTranslation} from "@/i18n/use-app-translation";
 
 function ClinicRegionalSettingsForm() {
+  const {t} = useAppTranslation("settings");
   const {settings, isLoading, clinicId} = useClinicSettings();
   const {updateSettings, isUpdating} = useUpdateClinicSettings();
 
@@ -69,10 +71,9 @@ function ClinicRegionalSettingsForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Regional Settings</CardTitle>
+        <CardTitle>{t("regional.title")}</CardTitle>
         <CardDescription>
-          Select your country to set the clinic's default currency and
-          localization preferences.
+          {t("regional.description")}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -80,19 +81,19 @@ function ClinicRegionalSettingsForm() {
           <FieldGroup className="gap-6">
             <Field data-invalid={!!errors?.price_currency}>
               <FieldLabel htmlFor="price_currency">
-                Clinic Currency / Country
+                {t("regional.label")}
               </FieldLabel>
               <Controller
                 control={control}
                 name="price_currency"
-                rules={{required: "Currency is required"}}
+                rules={{required: t("regional.required")}}
                 render={({field}) => (
                   <Select
                     onValueChange={field.onChange}
                     value={field.value}
                     disabled={isUpdating}>
                     <SelectTrigger className="w-full mt-1">
-                      <SelectValue placeholder="Select Country & Currency" />
+                      <SelectValue placeholder={t("regional.placeholder")} />
                     </SelectTrigger>
                     <SelectContent
                       position="popper"
@@ -113,7 +114,7 @@ function ClinicRegionalSettingsForm() {
             <div className="flex justify-end gap-3 pt-4 border-t border-border/10">
               <Button type="submit" disabled={isUpdating}>
                 {isUpdating && <Spinner className="size-4" />}
-                <span>Save Regional Settings</span>
+                <span>{t("regional.submit")}</span>
               </Button>
             </div>
           </FieldGroup>

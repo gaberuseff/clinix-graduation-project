@@ -15,15 +15,7 @@ import {useAppTranslation} from "@/i18n/use-app-translation";
 import {RiUserSettingsLine} from "@remixicon/react";
 import {Link} from "react-router-dom";
 import {doctorNavLinks, receptionistNavLinks} from "@/config/navigation";
-
-const secondaryItems = [
-  {
-    title: "Preferences",
-    titleKey: "preferences",
-    url: "/preferences",
-    icon: <RiUserSettingsLine />,
-  },
-];
+import {PATHS} from "@/config/paths";
 
 export function AppSidebar({...props}) {
   const {user: rawUser, role: userRole} = useUser();
@@ -41,6 +33,20 @@ export function AppSidebar({...props}) {
       icon: IconComponent ? <IconComponent className="size-4" /> : null,
     };
   });
+
+  const preferencesUrl =
+    userRole === "secretary"
+      ? PATHS.secretary.preferences
+      : PATHS.doctor.preferences;
+
+  const secondaryItems = [
+    {
+      title: "Preferences",
+      titleKey: "preferences",
+      url: preferencesUrl,
+      icon: <RiUserSettingsLine />,
+    },
+  ];
 
   const user = rawUser
     ? {

@@ -1,8 +1,10 @@
+import {useAppTranslation} from "@/i18n/use-app-translation";
 import {Button} from "@/components/ui/button";
 import {RiRefreshLine} from "@remixicon/react";
 import useSecretaries from "./useSecretaries";
 
 function SecretariesTableOperations() {
+  const {t} = useAppTranslation("secretaries");
   const {refetch, isFetching} = useSecretaries();
 
   return (
@@ -13,7 +15,7 @@ function SecretariesTableOperations() {
         onClick={() => refetch()}
         disabled={isFetching}
         className="shrink-0"
-        title="Refresh secretaries list">
+        title={t("refreshTooltip")}>
         <RiRefreshLine
           className={`size-4 text-muted-foreground ${
             isFetching ? "animate-spin text-primary" : ""

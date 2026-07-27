@@ -21,5 +21,3 @@ export function TextState({
     </div>
   );
 }
-
-export default TextState;

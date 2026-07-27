@@ -1,0 +1,26 @@
+{
+  "title": "Settings",
+  "regional": {
+    "title": "Regional Settings",
+    "description": "Select your country to set the clinic's default currency and localization preferences.",
+    "label": "Clinic Currency / Country",
+    "placeholder": "Select Country & Currency",
+    "submit": "Save Regional Settings",
+    "required": "Currency is required"
+  },
+  "prices": {
+    "title": "Appointment Fees",
+    "description": "Configure default billing rates for checkups and follow-up consultations.",
+    "checkupLabel": "Checkup Fee",
+    "checkupPlaceholder": "e.g. 200",
+    "followupLabel": "Follow-up Fee",
+    "followupPlaceholder": "e.g. 100",
+    "negativeError": "Fee cannot be negative",
+    "preview": "Preview: ",
+    "submit": "Save Settings"
+  },
+  "notifications": {
+    "success": "Settings updated successfully!",
+    "error": "Failed to update settings"
+  }
+}

@@ -30,8 +30,10 @@ import {
 import { useState } from "react";
 import useSecretaries from "./useSecretaries";
 import { useUpdateSecretary } from "./useUpdateSecretary";
+import { useAppTranslation } from "@/i18n/use-app-translation";
 
 function SecretariesTable() {
+  const {t} = useAppTranslation("secretaries");
   const {secretaries, isLoadingSecretaries, isError, error} = useSecretaries();
   const {updateSecretary, isUpdating} = useUpdateSecretary();
 
@@ -45,10 +47,10 @@ function SecretariesTable() {
   if (isError) {
     return (
       <TextState
-        title="Failed to Load Secretaries"
+        title={t("states.errorTitle")}
         description={
           error?.message ||
-          "Something went wrong while fetching secretary records."
+          t("states.errorDescription")
         }
         icon={RiAlertLine}
       />
@@ -58,8 +60,8 @@ function SecretariesTable() {
   if (!secretaries || secretaries.length === 0) {
     return (
       <TextState
-        title="No Secretaries Registered"
-        description="No registered secretaries found for this clinic at the moment."
+        title={t("states.emptyTitle")}
+        description={t("states.emptyDescription")}
         icon={RiUser3Line}
       />
     );
@@ -96,19 +98,19 @@ function SecretariesTable() {
             <TableHeader className="bg-muted/40">
               <TableRow className="border-b border-border/40 hover:bg-transparent">
                 <TableHead className="text-start font-bold text-foreground/80 py-2.5 ps-4">
-                  Full Name
+                  {t("table.fullName")}
                 </TableHead>
                 <TableHead className="text-start font-bold text-foreground/80 py-2.5">
-                  Email Address
+                  {t("table.email")}
                 </TableHead>
                 <TableHead className="text-start font-bold text-foreground/80 py-2.5">
-                  Phone Number
+                  {t("table.phone")}
                 </TableHead>
                 <TableHead className="text-start font-bold text-foreground/80 py-2.5">
-                  Status
+                  {t("table.status")}
                 </TableHead>
                 <TableHead className="text-end font-bold text-foreground/80 py-2.5 pe-4">
-                  Actions
+                  {t("table.actions")}
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -149,7 +151,7 @@ function SecretariesTable() {
                           ? "bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20"
                           : "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20"
                       }`}>
-                      {secretary.is_blocked ? "Blocked" : "Active"}
+                      {secretary.is_blocked ? t("table.blocked") : t("table.active")}
                     </Badge>
                   </TableCell>
 
@@ -162,7 +164,7 @@ function SecretariesTable() {
                           disabled={isUpdating}
                           className="h-8 w-8">
                           <RiMoreLine className="size-4 text-muted-foreground" />
-                          <span className="sr-only">Open Actions Menu</span>
+                          <span className="sr-only">{t("table.openActions")}</span>
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end" className="w-36">
@@ -173,12 +175,12 @@ function SecretariesTable() {
                           {secretary.is_blocked ? (
                             <>
                               <RiCheckboxCircleLine className="size-4 text-muted-foreground" />
-                              <span>Unblock</span>
+                              <span>{t("table.unblock")}</span>
                             </>
                           ) : (
                             <>
                               <RiForbidLine className="size-4 text-muted-foreground" />
-                              <span>Block</span>
+                              <span>{t("table.block")}</span>
                             </>
                           )}
                         </DropdownMenuItem>
@@ -188,7 +190,7 @@ function SecretariesTable() {
                           variant="destructive"
                           className="gap-2 text-destructive">
                           <RiDeleteBinLine className="size-4" />
-                          <span>Delete</span>
+                          <span>{t("table.delete")}</span>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -208,8 +210,8 @@ function SecretariesTable() {
         }}
         onConfirm={handleConfirmDelete}
         itemName={secretaryToDelete?.full_name}
-        title="Delete Secretary"
-        description="Are you sure you want to delete this secretary account?"
+        title={t("deleteModal.title")}
+        description={t("deleteModal.description")}
         isDeleting={isUpdating}
       />
     </>

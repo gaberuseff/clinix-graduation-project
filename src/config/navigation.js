@@ -1,6 +1,5 @@
 // src/config/navigation.js
 import {
-  Calendar,
   CreditCard,
   FileText,
   LayoutDashboard,
@@ -8,52 +7,53 @@ import {
   Stethoscope,
   UserPlus,
   Users,
-  Wallet,
+  Wallet
 } from "lucide-react"; // استعمل أي مكتبة أيقونات تحبها
+import {PATHS} from "./paths";
 
 // روابط سايد بار الطبيب
 export const doctorNavLinks = [
   {
     title: "الرئيسية",
     titleKey: "dashboard",
-    path: "/doctor/dashboard",
+    path: PATHS.doctor.dashboard,
     icon: LayoutDashboard,
   },
   {
     title: "الكشوفات",
     titleKey: "visits",
-    path: "/doctor/visits",
+    path: PATHS.doctor.visits,
     icon: Stethoscope,
   },
   {
     title: "سجلات المرضى",
     titleKey: "patients",
-    path: "/doctor/patients",
+    path: PATHS.doctor.patients,
     icon: Users,
   },
 
   {
     title: "أرشيف الروشتات",
     titleKey: "prescriptions",
-    path: "/doctor/prescriptions",
+    path: PATHS.doctor.prescriptions,
     icon: FileText,
   },
   {
     title: "المالية والتقارير",
     titleKey: "finance",
-    path: "/doctor/finance",
+    path: PATHS.doctor.finance,
     icon: Wallet,
   },
   {
     title: "السكرتارية",
     titleKey: "secretary",
-    path: "/doctor/secretary",
+    path: PATHS.doctor.secretary,
     icon: UserPlus,
   },
   {
     title: "الإعدادات",
     titleKey: "settings",
-    path: "/doctor/settings",
+    path: PATHS.doctor.settings,
     icon: Settings,
   },
 ];
@@ -63,25 +63,25 @@ export const receptionistNavLinks = [
   {
     title: "الرئيسية",
     titleKey: "dashboard",
-    path: "/secretary/dashboard",
+    path: PATHS.secretary.dashboard,
     icon: LayoutDashboard,
   },
   {
     title: "المواعيد",
     titleKey: "appointments",
-    path: "/secretary/appointments",
+    path: PATHS.secretary.appointments,
     icon: UserPlus,
   },
   {
     title: "قائمة المرضى",
     titleKey: "patients",
-    path: "/secretary/patients",
+    path: PATHS.secretary.patients,
     icon: Users,
   },
   {
     title: "الخزينة والمدفوعات",
     titleKey: "payments",
-    path: "/secretary/payments",
+    path: PATHS.secretary.payments,
     icon: CreditCard,
   },
 ];

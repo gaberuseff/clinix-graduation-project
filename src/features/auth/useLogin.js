@@ -3,6 +3,8 @@ import {loginUser} from "../../services/apiAuth";
 import {toast} from "react-hot-toast";
 import {useNavigate} from "react-router-dom";
 
+import {PATHS} from "@/config/paths";
+
 function useLogin() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -14,7 +16,9 @@ function useLogin() {
       queryClient.setQueryData(["user"], data?.user);
       const role = data?.user?.user_metadata?.role;
       const redirectPath =
-        role === "secretary" ? "/secretary/dashboard" : "/doctor/dashboard";
+        role === "secretary"
+          ? PATHS.secretary.dashboard
+          : PATHS.doctor.dashboard;
       navigate(redirectPath, {replace: true});
     },
 

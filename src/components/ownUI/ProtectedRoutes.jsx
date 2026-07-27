@@ -1,6 +1,7 @@
 import {Navigate, Outlet, useLocation} from "react-router-dom";
 import useUser from "../../features/auth/useUser";
 import {Spinner} from "../ui/spinner";
+import {PATHS} from "@/config/paths";
 
 function ProtectedRoutes({allowedRoles}) {
   const {isAuthenticated, isPending, role} = useUser();
@@ -15,19 +16,19 @@ function ProtectedRoutes({allowedRoles}) {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" state={{from: location}} replace />;
+    return <Navigate to={PATHS.login} state={{from: location}} replace />;
   }
 
   const hasPermission = allowedRoles.includes(role);
 
   if (!hasPermission) {
     if (role === "doctor") {
-      return <Navigate to="/doctor/dashboard" replace />;
+      return <Navigate to={PATHS.doctor.dashboard} replace />;
     }
     if (role === "secretary") {
-      return <Navigate to="/secretary/dashboard" replace />;
+      return <Navigate to={PATHS.secretary.dashboard} replace />;
     }
-    return <Navigate to="/login" replace />;
+    return <Navigate to={PATHS.login} replace />;
   }
 
   return <Outlet />;

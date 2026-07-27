@@ -20,8 +20,10 @@ import {
 } from "@remixicon/react";
 import useCreateSecretaries from "./useCreateSecretaries";
 import {Spinner} from "@/components/ui/spinner";
+import {useAppTranslation} from "@/i18n/use-app-translation";
 
 function CreateSecretariesDrawer() {
+  const {t} = useAppTranslation("secretaries");
   const [isOpen, setIsOpen] = useState(false);
 
   const {createSecretary, isCreatingSecretary} =
@@ -64,7 +66,7 @@ function CreateSecretariesDrawer() {
       <SheetTrigger asChild>
         <Button className="flex items-center gap-2 font-semibold">
           <RiUserAddLine className="size-4" />
-          <span>Add Secretary</span>
+          <span>{t("drawer.trigger")}</span>
         </Button>
       </SheetTrigger>
       <SheetContent
@@ -74,12 +76,11 @@ function CreateSecretariesDrawer() {
           <div className="flex items-center gap-2 text-primary">
             <RiUser3Line className="size-6 text-primary" />
             <SheetTitle className="text-xl font-bold tracking-tight">
-              Add New Secretary
+              {t("drawer.title")}
             </SheetTitle>
           </div>
           <SheetDescription className="text-muted-foreground mt-1">
-            Register a new secretary account. They will be able to log in using
-            their email and password.
+            {t("drawer.description")}
           </SheetDescription>
         </SheetHeader>
 
@@ -94,20 +95,20 @@ function CreateSecretariesDrawer() {
                 htmlFor="name"
                 className="text-sm font-semibold flex items-center gap-1.5">
                 <RiUser3Line className="size-4 text-muted-foreground/75" />
-                <span>Full Name</span>
+                <span>{t("drawer.fields.fullName")}</span>
                 <span className="text-destructive font-bold text-xs">*</span>
               </FieldLabel>
               <Input
                 id="name"
                 type="text"
                 autoComplete="off"
-                placeholder="e.g. Sarah Smith"
+                placeholder={t("drawer.fields.fullNamePlaceholder")}
                 className="w-full mt-1"
                 {...register("name", {
-                  required: "Secretary name is required",
+                  required: t("drawer.errors.nameRequired"),
                   minLength: {
                     value: 2,
-                    message: "Name must be at least 2 characters",
+                    message: t("drawer.errors.nameMin"),
                   },
                 })}
               />
@@ -120,20 +121,20 @@ function CreateSecretariesDrawer() {
                 htmlFor="phone"
                 className="text-sm font-semibold flex items-center gap-1.5">
                 <RiPhoneLine className="size-4 text-muted-foreground/75" />
-                <span>Phone Number</span>
+                <span>{t("drawer.fields.phone")}</span>
                 <span className="text-destructive font-bold text-xs">*</span>
               </FieldLabel>
               <Input
                 id="phone"
                 type="tel"
                 autoComplete="off"
-                placeholder="e.g. +1234567890"
+                placeholder={t("drawer.fields.phonePlaceholder")}
                 className="w-full mt-1"
                 {...register("phone", {
-                  required: "Phone number is required",
+                  required: t("drawer.errors.phoneRequired"),
                   pattern: {
                     value: /^[+]*[0-9\s-]*$/,
-                    message: "Please enter a valid phone number",
+                    message: t("drawer.errors.phonePattern"),
                   },
                 })}
               />
@@ -146,20 +147,20 @@ function CreateSecretariesDrawer() {
                 htmlFor="email"
                 className="text-sm font-semibold flex items-center gap-1.5">
                 <RiMailLine className="size-4 text-muted-foreground/75" />
-                <span>Email Address</span>
+                <span>{t("drawer.fields.email")}</span>
                 <span className="text-destructive font-bold text-xs">*</span>
               </FieldLabel>
               <Input
                 id="email"
                 type="email"
                 autoComplete="off"
-                placeholder="e.g. sarah@example.com"
+                placeholder={t("drawer.fields.emailPlaceholder")}
                 className="w-full mt-1"
                 {...register("email", {
-                  required: "Email is required",
+                  required: t("drawer.errors.emailRequired"),
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Please enter a valid email address",
+                    message: t("drawer.errors.emailPattern"),
                   },
                 })}
               />
@@ -172,7 +173,7 @@ function CreateSecretariesDrawer() {
                 htmlFor="password"
                 className="text-sm font-semibold flex items-center gap-1.5">
                 <RiLockLine className="size-4 text-muted-foreground/75" />
-                <span>Password</span>
+                <span>{t("drawer.fields.password")}</span>
                 <span className="text-destructive font-bold text-xs">*</span>
               </FieldLabel>
               <Input
@@ -182,10 +183,10 @@ function CreateSecretariesDrawer() {
                 placeholder="••••••••"
                 className="w-full mt-1"
                 {...register("password", {
-                  required: "Password is required",
+                  required: t("drawer.errors.passwordRequired"),
                   minLength: {
                     value: 6,
-                    message: "Password must be at least 6 characters",
+                    message: t("drawer.errors.passwordMin"),
                   },
                 })}
               />
@@ -198,7 +199,7 @@ function CreateSecretariesDrawer() {
                 htmlFor="confirmPassword"
                 className="text-sm font-semibold flex items-center gap-1.5">
                 <RiLockLine className="size-4 text-muted-foreground/75" />
-                <span>Confirm Password</span>
+                <span>{t("drawer.fields.confirmPassword")}</span>
                 <span className="text-destructive font-bold text-xs">*</span>
               </FieldLabel>
               <Input
@@ -208,9 +209,9 @@ function CreateSecretariesDrawer() {
                 placeholder="••••••••"
                 className="w-full mt-1"
                 {...register("confirmPassword", {
-                  required: "Password confirmation is required",
+                  required: t("drawer.errors.confirmRequired"),
                   validate: (value) =>
-                    value === watch("password") || "Passwords do not match",
+                    value === watch("password") || t("drawer.errors.confirmMatch"),
                 })}
               />
               <FieldError>{errors?.confirmPassword?.message}</FieldError>
@@ -225,14 +226,14 @@ function CreateSecretariesDrawer() {
               disabled={isCreatingSecretary}
               onClick={() => setIsOpen(false)}
               className="flex-1">
-              Cancel
+              {t("drawer.buttons.cancel")}
             </Button>
             <Button
               type="submit"
               disabled={isCreatingSecretary}
               className="flex-1 flex items-center justify-center gap-2">
               {isCreatingSecretary && <Spinner className="size-4" />}
-              <span>Add Secretary</span>
+              <span>{t("drawer.buttons.submit")}</span>
             </Button>
           </div>
         </form>
