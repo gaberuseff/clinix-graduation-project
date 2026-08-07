@@ -3,11 +3,12 @@ import {
   CreditCard,
   FileText,
   LayoutDashboard,
+  Percent,
   Settings,
   Stethoscope,
   UserPlus,
   Users,
-  Wallet
+  Wallet,
 } from "lucide-react"; // استعمل أي مكتبة أيقونات تحبها
 import {PATHS} from "./paths";
 
@@ -26,17 +27,10 @@ export const doctorNavLinks = [
     icon: Stethoscope,
   },
   {
-    title: "سجلات المرضى",
+    title: "المرضى",
     titleKey: "patients",
     path: PATHS.doctor.patients,
     icon: Users,
-  },
-
-  {
-    title: "أرشيف الروشتات",
-    titleKey: "prescriptions",
-    path: PATHS.doctor.prescriptions,
-    icon: FileText,
   },
   {
     title: "المالية والتقارير",
@@ -77,11 +71,5 @@ export const receptionistNavLinks = [
     titleKey: "patients",
     path: PATHS.secretary.patients,
     icon: Users,
-  },
-  {
-    title: "الخزينة والمدفوعات",
-    titleKey: "payments",
-    path: PATHS.secretary.payments,
-    icon: CreditCard,
   },
 ];

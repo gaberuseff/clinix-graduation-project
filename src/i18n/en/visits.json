@@ -1,0 +1,97 @@
+{
+  "title": "Visits & Medical Records (EMR)",
+  "subtitle": "Manage patient examinations, review diagnostic histories, and issue prescriptions",
+  "searchPlaceholder": "Search by patient phone number or name...",
+  "searchBtn": "Search",
+  "clearSearch": "Clear Search",
+  "tabs": {
+    "todayAppointments": "Today's Appointments",
+    "todayVisits": "Today's Visits",
+    "patientHistory": "Patient EMR History"
+  },
+  "buttons": {
+    "addVisit": "Add New Visit",
+    "startExamination": "Start Consultation",
+    "saveVisit": "Save Visit & Prescription",
+    "saveOffline": "Save Locally (Offline)",
+    "cancel": "Cancel",
+    "addMedication": "Add Medication",
+    "removeMedication": "Remove",
+    "viewHistory": "Medical History",
+    "editVisit": "Edit Visit",
+    "deleteVisit": "Delete"
+  },
+  "modal": {
+    "title": "Clinical Examination & EMR Details",
+    "desc": "Record clinical diagnostic findings, doctor notes, and prescribed medications",
+    "fields": {
+      "patientName": "Patient Name",
+      "patientPhone": "Patient Phone Number (Unique Key)",
+      "visitType": "Visit Type",
+      "checkup": "Checkup (New)",
+      "followUp": "Follow-up",
+      "diagnosis": "Clinical Diagnosis",
+      "doctorNotes": "Doctor Notes / Instructions",
+      "prescription": "Prescription Medications",
+      "medName": "Medication Name",
+      "strength": "Dosage / Strength",
+      "frequency": "Frequency",
+      "duration": "Duration"
+    },
+    "placeholders": {
+      "patientName": "Enter full patient name",
+      "patientPhone": "Enter phone number (e.g. 01012345678)",
+      "diagnosis": "Enter medical diagnosis and observed symptoms...",
+      "doctorNotes": "Enter special instructions or advice...",
+      "medName": "Medication name (e.g. Augmentin 1g)",
+      "strength": "e.g. 1000mg",
+      "frequency": "e.g. Twice daily",
+      "duration": "e.g. For 7 days"
+    },
+    "errors": {
+      "nameRequired": "Patient name is required",
+      "phoneRequired": "Phone number is required as the unique identifier",
+      "phonePattern": "Invalid phone number format",
+      "diagnosisRequired": "Medical diagnosis is required"
+    }
+  },
+  "table": {
+    "columns": {
+      "serial": "#",
+      "patientName": "Patient Name",
+      "phone": "Phone Number",
+      "visitType": "Visit Type",
+      "status": "Status",
+      "time": "Time",
+      "actions": "Actions",
+      "diagnosis": "Diagnosis"
+    },
+    "status": {
+      "pending": "Pending",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "visitsEmpty": "No visits completed today",
+    "visitsEmptyDesc": "Once medical records are entered today, they will appear here to edit or print at any time.",
+    "printPrescription": "Print Prescription",
+    "edit": "Edit"
+  },
+  "history": {
+    "title": "Patient Medical History",
+    "noHistory": "No previous medical records found for this phone number",
+    "searchPrompt": "Enter patient phone number above to look up complete medical history",
+    "visitDate": "Visit Date",
+    "diagnosisLabel": "Diagnosis:",
+    "notesLabel": "Doctor Notes:",
+    "prescriptionLabel": "Prescribed Medications:",
+    "totalVisits": "Total Visits: {{count}}",
+    "noName": "Unnamed Patient"
+  },
+  "toasts": {
+    "createSuccess": "Visit record and prescription saved successfully!",
+    "createOffline": "Saved Locally: Visit saved offline. Will automatically sync by phone number when online.",
+    "updateSuccess": "Visit record updated successfully!",
+    "deleteSuccess": "Visit record deleted successfully!",
+    "syncSuccess": "Visits synced successfully with cloud!"
+  }
+}

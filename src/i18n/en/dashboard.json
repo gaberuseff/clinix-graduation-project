@@ -6,10 +6,12 @@
     "patients": "Patients",
     "secretaries": "Secretaries",
     "discounts": "Discount Codes",
+    "discountsSubtitle": "Create and manage promotional discount codes for checkup services",
     "settings": "Settings",
     "help": "Get Help",
     "preferences": "Preferences",
     "visits": "Visits",
+    "visitsSubtitle": "Manage doctor appointments and current active consultations",
     "prescriptions": "Prescriptions Archive",
     "finance": "Finance & Reports",
     "booking": "Book Appointment",
@@ -27,5 +29,23 @@
   },
   "header": {
     "greeting": "Good Day, {{name}}"
+  },
+  "stats": {
+    "todayTotal": "Today's Bookings",
+    "todayPending": "Pending Bookings",
+    "todayCompleted": "Completed Bookings",
+    "todayCancelled": "Cancelled Bookings",
+    "totalRevenue": "Total Completed Revenue",
+    "todayRevenue": "Today's Revenue",
+    "totalPatients": "Total Patients",
+    "chartTitle": "Booking Activity",
+    "chartSubtitle": "Statistical view of daily bookings and completed cases in the last 7 days"
+  },
+  "secretaryDashboard": {
+    "quickActions": "Quick Actions",
+    "todayAppointments": "Today's Appointments",
+    "recentPatients": "Recently Registered Patients",
+    "noAppointments": "No appointments scheduled for today",
+    "noRecentPatients": "No recent patients found"
   }
 }

@@ -66,24 +66,12 @@ export function NavUser({user}) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <RiUserLine />
-                {t("userMenu.account")}
-              </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={registerPasskey}
                 disabled={isRegistering}>
                 <RiKey2Line />
                 {t("userMenu.registerPasskey")}
                 {isRegistering && <Spinner className="size-3.5 ms-auto" />}
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <RiBankCardLine />
-                {t("userMenu.billing")}
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <RiNotification3Line />
-                {t("userMenu.notifications")}
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

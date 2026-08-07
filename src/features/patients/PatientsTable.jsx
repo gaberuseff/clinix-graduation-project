@@ -29,11 +29,14 @@ import {
   RiMoreLine,
   RiPhoneLine,
   RiUser3Line,
+  RiStethoscopeLine,
 } from "@remixicon/react";
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 import CreatePatientDrawer from "./CreatePatientDrawer";
 
 function PatientsTable() {
+  const navigate = useNavigate();
   const {patients, count, isLoadingPatients, isError, error} = usePatients();
   const {deletePatientMutation, isDeletingPatient} = useDeletePatient();
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -91,7 +94,7 @@ function PatientsTable() {
 
   return (
     <>
-      <div className="w-full overflow-hidden rounded-xl border">
+      <div className="w-full overflow-hidden rounded-2xl border border-border/50 bg-card shadow-xs">
         <div className="overflow-x-auto w-full">
           <Table className="w-full text-start border-collapse">
             <TableHeader className="bg-muted/40">
@@ -117,7 +120,7 @@ function PatientsTable() {
               {patients.map((patient) => (
                 <TableRow
                   key={patient.id}
-                  className="border-b border-border/25">
+                  className="border-b border-border/25 hover:bg-primary/[0.02] dark:hover:bg-primary/[0.04]">
                   <TableCell className="py-2.5 ps-4 font-semibold text-foreground/90 font-sans ">
                     <div className="flex items-center gap-2.5">
                       <span className="capitalize">{patient.name}</span>
@@ -143,10 +146,10 @@ function PatientsTable() {
                   <TableCell className="py-2.5">
                     <Badge
                       variant="secondary"
-                      className={`font-semibold text-xs px-3 py-1 rounded-lg border ${
+                      className={`font-semibold text-[10px] tracking-wide px-2.5 py-0.5 rounded-full border select-none ${
                         patient.gender === "male"
-                          ? "bg-blue-500/10 text-blue-600 dark:text-blue-400"
-                          : "bg-pink-500/10 text-pink-600 dark:text-pink-400"
+                          ? "bg-blue-500/10 border-blue-200/50 dark:border-blue-800/50 text-blue-600 dark:text-blue-400"
+                          : "bg-pink-500/10 border-pink-200/50 dark:border-pink-800/50 text-pink-600 dark:text-pink-400"
                       }`}>
                       {patient.gender?.toUpperCase() || "—"}
                     </Badge>
@@ -155,12 +158,21 @@ function PatientsTable() {
                   <TableCell className="py-2.5 pe-4 text-end">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon" className="h-8 w-8">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 rounded-lg hover:bg-muted/80">
                           <RiMoreLine className="size-4 text-muted-foreground" />
                           <span className="sr-only">Open Actions Menu</span>
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="w-36">
+                      <DropdownMenuContent align="end" className="w-40">
+                        <DropdownMenuItem
+                          onClick={() => navigate(`/visits?phone=${encodeURIComponent(patient.phone)}`)}
+                          className="gap-2 text-emerald-600 dark:text-emerald-400 font-semibold">
+                          <RiStethoscopeLine className="size-4" />
+                          <span>الكشوفات والسجل</span>
+                        </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() => handleEdit(patient)}
                           className="gap-2">

@@ -1,0 +1,54 @@
+{
+  "title": "Finance & Reports",
+  "subtitle": "Analyze clinic financial performance, revenue stats, bookings, and billing history",
+  "filters": {
+    "today": "Today",
+    "last7Days": "Last 7 Days",
+    "last30Days": "Last 30 Days",
+    "custom": "Custom Period",
+    "startDate": "Start Date",
+    "endDate": "End Date"
+  },
+  "kpi": {
+    "completed": "Completed Bookings",
+    "cancelled": "Cancelled Bookings",
+    "pending": "Pending Bookings",
+    "averageTicket": "Average Visit Price",
+    "revenue": "Total Revenue",
+    "cancelledRevenue": "Cancelled / Lost Revenue",
+    "expectedRevenue": "Expected Revenue"
+  },
+  "charts": {
+    "revenueTrend": "Daily Revenue Trend",
+    "completedCount": "Completed Examinations",
+    "revenueLabel": "Revenue"
+  },
+  "breakdown": {
+    "title": "Visit Type Breakdown",
+    "checkup": "Checkup",
+    "followup": "Follow-up",
+    "visits": "visits",
+    "percentage": "Revenue Share"
+  },
+  "transactions": {
+    "title": "Detailed Financial Transactions",
+    "patientName": "Patient Name",
+    "phone": "Phone Number",
+    "date": "Date & Time",
+    "type": "Visit Type",
+    "fee": "Examination Fee",
+    "status": "Status",
+    "noTransactions": "No financial transactions recorded for this period"
+  },
+  "buttons": {
+    "downloadPDF": "Download Financial Report PDF",
+    "downloading": "Preparing print layout..."
+  },
+  "pdf": {
+    "reportTitle": "Electronic Clinic Financial Report",
+    "metaClinic": "Clinic Name:",
+    "metaDoctor": "Responsible Doctor:",
+    "metaPeriod": "Reporting Period:",
+    "signature": "Financial Department Signature:"
+  }
+}

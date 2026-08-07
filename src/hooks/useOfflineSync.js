@@ -1,6 +1,11 @@
 import {useEffect, useState} from "react";
 import {useQueryClient} from "@tanstack/react-query";
-import {getOfflineQueue, syncOfflineActions} from "@/services/offlineSync";
+import {
+  getOfflineQueue,
+  getOfflineAppointmentsQueue,
+  hasPendingOfflineActions,
+  syncOfflineActions,
+} from "@/services/offlineSync";
 import {toast} from "react-hot-toast";
 
 export default function useOfflineSync() {
@@ -10,8 +15,8 @@ export default function useOfflineSync() {
   useEffect(() => {
     async function checkAndSync() {
       if (!navigator.onLine) return;
-      const queue = await getOfflineQueue();
-      if (queue.length === 0) return;
+      const hasActions = await hasPendingOfflineActions();
+      if (!hasActions) return;
 
       setIsSyncing(true);
       toast.loading("Syncing offline changes...", {
@@ -21,8 +26,12 @@ export default function useOfflineSync() {
       try {
         await syncOfflineActions(queryClient);
 
-        const remainingQueue = await getOfflineQueue();
-        if (remainingQueue.length === 0) {
+        const remainingPatients = await getOfflineQueue();
+        const remainingAppointments = await getOfflineAppointmentsQueue();
+        if (
+          remainingPatients.length === 0 &&
+          remainingAppointments.length === 0
+        ) {
           toast.success("Offline changes synced successfully!", {
             id: "offline-sync",
           });

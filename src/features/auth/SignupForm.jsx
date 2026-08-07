@@ -1,12 +1,6 @@
 import {cn} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import {Card, CardContent} from "@/components/ui/card";
 import {
   Field,
   FieldDescription,
@@ -64,19 +58,18 @@ export function SignupForm({className, ...props}) {
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader className="text-center">
-          <CardTitle className="text-xl">Create Doctor Account</CardTitle>
-          <CardDescription>
-            {step === 1
-              ? "Step 1 of 2 - Clinic information"
-              : "Step 2 of 2 - Doctor information"}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)}>
+      <Card className="overflow-hidden p-0">
+        <CardContent className="grid p-0 md:grid-cols-2">
+          <form onSubmit={handleSubmit(onSubmit)} className="p-6 md:p-12">
             {step === 1 && (
               <FieldGroup>
+                <div className="flex flex-col items-center gap-2 text-center">
+                  <h1 className="text-2xl font-bold">Create Doctor Account</h1>
+                  <p className="text-balance text-muted-foreground text-sm">
+                    Step 1 of 2 - Clinic information
+                  </p>
+                </div>
+
                 <Field data-invalid={!!errors?.clinicName}>
                   <FieldLabel htmlFor="clinicName">Clinic Name</FieldLabel>
                   <Input
@@ -88,6 +81,7 @@ export function SignupForm({className, ...props}) {
                   />
                   <FieldError>{errors?.clinicName?.message}</FieldError>
                 </Field>
+
                 <Field data-invalid={!!errors?.clinicAddress}>
                   <FieldLabel htmlFor="clinicAddress">
                     Clinic Address
@@ -101,6 +95,7 @@ export function SignupForm({className, ...props}) {
                   />
                   <FieldError>{errors?.clinicAddress?.message}</FieldError>
                 </Field>
+
                 <Field data-invalid={!!errors?.clinicSpecialty}>
                   <FieldLabel htmlFor="clinicSpecialty">
                     Clinic Specialty
@@ -114,6 +109,7 @@ export function SignupForm({className, ...props}) {
                   />
                   <FieldError>{errors?.clinicSpecialty?.message}</FieldError>
                 </Field>
+
                 <Field>
                   <Button
                     type="button"
@@ -121,7 +117,7 @@ export function SignupForm({className, ...props}) {
                     className="w-full">
                     Continue
                   </Button>
-                  <FieldDescription className="text-center">
+                  <FieldDescription className="text-center mt-2">
                     Already have an account? <Link to="/login">Sign in</Link>
                   </FieldDescription>
                 </Field>
@@ -130,6 +126,13 @@ export function SignupForm({className, ...props}) {
 
             {step === 2 && (
               <FieldGroup>
+                <div className="flex flex-col items-center gap-2 text-center">
+                  <h1 className="text-2xl font-bold">Create Doctor Account</h1>
+                  <p className="text-balance text-muted-foreground text-sm">
+                    Step 2 of 2 - Doctor information
+                  </p>
+                </div>
+
                 <Field data-invalid={!!errors?.fullName}>
                   <FieldLabel htmlFor="fullName">Full Name</FieldLabel>
                   <Input
@@ -141,6 +144,7 @@ export function SignupForm({className, ...props}) {
                   />
                   <FieldError>{errors?.fullName?.message}</FieldError>
                 </Field>
+
                 <Field data-invalid={!!errors?.email}>
                   <FieldLabel htmlFor="email">Email</FieldLabel>
                   <Input
@@ -157,6 +161,7 @@ export function SignupForm({className, ...props}) {
                   />
                   <FieldError>{errors?.email?.message}</FieldError>
                 </Field>
+
                 <Field data-invalid={!!errors?.phone}>
                   <FieldLabel htmlFor="phone">Phone</FieldLabel>
                   <Input
@@ -168,6 +173,7 @@ export function SignupForm({className, ...props}) {
                   />
                   <FieldError>{errors?.phone?.message}</FieldError>
                 </Field>
+
                 <Field>
                   <div className="grid grid-cols-2 gap-4">
                     <Field data-invalid={!!errors?.password}>
@@ -208,6 +214,7 @@ export function SignupForm({className, ...props}) {
                     Password must be at least 8 characters.
                   </FieldDescription>
                 </Field>
+
                 <div className="flex gap-4">
                   <Button
                     type="button"
@@ -225,12 +232,20 @@ export function SignupForm({className, ...props}) {
                     Create Account
                   </Button>
                 </div>
-                <FieldDescription className="text-center">
+                <FieldDescription className="text-center mt-2">
                   Already have an account? <Link to="/login">Sign in</Link>
                 </FieldDescription>
               </FieldGroup>
             )}
           </form>
+
+          <div className="relative hidden bg-muted md:block">
+            <img
+              src="/login-bg.png"
+              alt="Clinic Reception"
+              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+            />
+          </div>
         </CardContent>
       </Card>
     </div>

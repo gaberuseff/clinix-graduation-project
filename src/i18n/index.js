@@ -12,6 +12,10 @@ import secretariesEn from "./en/secretaries.json";
 import secretariesAr from "./ar/secretaries.json";
 import settingsEn from "./en/settings.json";
 import settingsAr from "./ar/settings.json";
+import visitsEn from "./en/visits.json";
+import visitsAr from "./ar/visits.json";
+import financeEn from "./en/finance.json";
+import financeAr from "./ar/finance.json";
 
 const savedLanguage =
   typeof window !== "undefined"
@@ -27,6 +31,8 @@ i18n.use(initReactI18next).init({
       appointments: appointmentsEn,
       secretaries: secretariesEn,
       settings: settingsEn,
+      visits: visitsEn,
+      finance: financeEn,
     },
 
     ar: {
@@ -36,6 +42,8 @@ i18n.use(initReactI18next).init({
       appointments: appointmentsAr,
       secretaries: secretariesAr,
       settings: settingsAr,
+      visits: visitsAr,
+      finance: financeAr,
     },
   },
 

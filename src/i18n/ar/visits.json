@@ -1,0 +1,97 @@
+{
+  "title": "الكشوفات والسجل المرضي",
+  "subtitle": "إدارة كشوفات المرضى والاطلاع على السجل الطبي والروشتات السابقة",
+  "searchPlaceholder": "ابحث برقم هاتف المريض أو اسمه...",
+  "searchBtn": "بحث",
+  "clearSearch": "مسح البحث",
+  "tabs": {
+    "todayAppointments": "حجوزات اليوم",
+    "todayVisits": "كشوفات اليوم",
+    "patientHistory": "السجل المرضي"
+  },
+  "buttons": {
+    "addVisit": "إضافة كشف جديد",
+    "startExamination": "بدء الكشف",
+    "saveVisit": "حفظ الكشف والروشتة",
+    "saveOffline": "حفظ محلي (بدون إنترنت)",
+    "cancel": "إغلاق",
+    "addMedication": "إضافة دواء للروشتة",
+    "removeMedication": "حذف الدواء",
+    "viewHistory": "السجل المرضي",
+    "editVisit": "تعديل الكشف",
+    "deleteVisit": "حذف"
+  },
+  "modal": {
+    "title": "تفاصيل الكشف الطبي والروشتة",
+    "desc": "قم بتسجيل بيانات الكشف والتشخيص والأدوية الموصوفة للمريض",
+    "fields": {
+      "patientName": "اسم المريض",
+      "patientPhone": "رقم هاتف المريض (معرّف المريض)",
+      "visitType": "نوع الكشف",
+      "checkup": "كشف جديد",
+      "followUp": "استشارة / إعادة",
+      "diagnosis": "التشخيص الطبي",
+      "doctorNotes": "ملاحظات الطبيب / التعليمات",
+      "prescription": "روشتة الأدوية",
+      "medName": "اسم الدواء",
+      "strength": "التركيز / الجرعة",
+      "frequency": "التكرار (مثال: مرتين يومياً)",
+      "duration": "المدة (مثال: 5 أيام)"
+    },
+    "placeholders": {
+      "patientName": "أدخل اسم المريض الرباعي",
+      "patientPhone": "أدخل رقم الهاتف (مثال: 01012345678)",
+      "diagnosis": "اكتب التشخيص الطبي والأعراض الظاهرة...",
+      "doctorNotes": "اكتب نصائح أو تعليمات خاصة للمريض...",
+      "medName": "اسم الدواء (مثال: Augmentin 1g)",
+      "strength": "مثال: 1000mg",
+      "frequency": "مثال: كل 12 ساعة",
+      "duration": "مثال: لمدة 7 أيام"
+    },
+    "errors": {
+      "nameRequired": "اسم المريض مطلوب",
+      "phoneRequired": "رقم هاتف المريض مطلوب لربط الكشف والسجل",
+      "phonePattern": "رقم الهاتف غير صحيح",
+      "diagnosisRequired": "يرجى كتابة التشخيص الطبي"
+    }
+  },
+  "table": {
+    "columns": {
+      "serial": "#",
+      "patientName": "اسم المريض",
+      "phone": "رقم الهاتف",
+      "visitType": "نوع الكشف",
+      "status": "الحالة",
+      "time": "الموعد",
+      "actions": "الإجراءات",
+      "diagnosis": "التشخيص"
+    },
+    "status": {
+      "pending": "في الانتظار",
+      "completed": "تم الكشف",
+      "cancelled": "ملغى"
+    },
+    "visitsEmpty": "لا توجد كشوفات مسجلة اليوم",
+    "visitsEmptyDesc": "عند البدء بإدخال كشوفات المرضى ستظهر هنا لتعديلها أو طباعة الروشتة في أي وقت.",
+    "printPrescription": "طباعة الروشتة",
+    "edit": "تعديل"
+  },
+  "history": {
+    "title": "السجل الطبي للمريض",
+    "noHistory": "لا توجد كشوفات سابقة مسجلة لهذا رقم الهاتف",
+    "searchPrompt": "أدخل رقم هاتف المريض في الأعلى لعرض سجله المرضي الكامل",
+    "visitDate": "تاريخ الكشف",
+    "diagnosisLabel": "التشخيص:",
+    "notesLabel": "تعليمات الطبيب:",
+    "prescriptionLabel": "الروشتة الموصوفة:",
+    "totalVisits": "إجمالي الكشوفات: {{count}}",
+    "noName": "مريض بدون اسم"
+  },
+  "toasts": {
+    "createSuccess": "تم حفظ الكشف والروشتة بنجاح!",
+    "createOffline": "حفظ محلي: تم حفظ الكشف محلياً وسوف يتم مزامنته برقم الهاتف فور عودة الاتصال بالإنترنت.",
+    "updateSuccess": "تم تحديث بيانات الكشف بنجاح!",
+    "deleteSuccess": "تم حذف الكشف بنجاح!",
+    "syncSuccess": "تم مزامنة الكشوفات بنجاح مع السيرفر!"
+  }
+}

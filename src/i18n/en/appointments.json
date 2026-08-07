@@ -1,4 +1,70 @@
 {
-  "title": "Appointments",
-  "subtitle": "Manage your clinic appointments and schedule"
+  "title": "Bookings",
+  "subtitle": "Manage clinic daily bookings and schedule",
+  "headers": {
+    "searchPlaceholder": "Search by patient name...",
+    "refreshTooltip": "Refresh bookings list"
+  },
+  "table": {
+    "columns": {
+      "name": "Patient Name",
+      "phone": "Phone Number",
+      "type": "Booking Type",
+      "price": "Price",
+      "date": "Date & Time",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "all": "All",
+      "pending": "Pending",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    }
+  },
+  "buttons": {
+    "addBooking": "Book Appointment",
+    "complete": "Complete",
+    "cancel": "Cancel",
+    "save": "Save Booking",
+    "close": "Close"
+  },
+  "modal": {
+    "add": {
+      "title": "Book New Appointment",
+      "desc": "Register a new booking by entering the details below. Booking type and price are automatically determined.",
+      "placeholders": {
+        "name": "e.g., John Doe",
+        "phone": "e.g., 01234567890",
+        "type": "Select visit type",
+        "checkup": "Checkup",
+        "followup": "Follow-up",
+        "date": "Select appointment date & time"
+      },
+      "errors": {
+        "nameRequired": "Patient name is required",
+        "phoneRequired": "Phone number is required",
+        "typeRequired": "Booking type is required",
+        "dateRequired": "Appointment date is required"
+      }
+    }
+  },
+  "toasts": {
+    "createSuccess": "Booking registered successfully!",
+    "createOffline": "Offline: Booking saved locally. Will sync when connection is restored.",
+    "createError": "Failed to register booking",
+    "statusSuccess": "Booking status updated successfully!",
+    "statusOffline": "Offline: Booking status updated locally. Will sync when connection is restored.",
+    "statusError": "Failed to update booking status"
+  },
+  "states": {
+    "error": {
+      "title": "Failed to load bookings",
+      "description": "An error occurred while fetching the bookings list."
+    },
+    "empty": {
+      "title": "No bookings registered",
+      "description": "No bookings have been found for this clinic at the moment."
+    }
+  }
 }

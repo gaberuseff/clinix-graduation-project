@@ -93,3 +93,16 @@ export async function updatePatient({id, updatedFields}) {
 
   return data;
 }
+
+export async function getClinicPatientsStats(clinicId) {
+  const {data, error} = await supabase.rpc("get_patients_stats", {
+    p_clinic_id: clinicId,
+  });
+
+  if (error) {
+    console.error(error);
+    throw new Error("Failed to load patients stats");
+  }
+
+  return data;
+}

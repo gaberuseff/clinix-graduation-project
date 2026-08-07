@@ -38,3 +38,18 @@ export function formatCurrency(amount, currencyCode) {
 // Add aliases to prevent typos in imports
 export const formateCurrency = formatCurrency;
 export const formateCurruncy = formatCurrency;
+
+export function formatDate(dateInput, locale = "en-US") {
+  if (!dateInput) return "";
+  const date = new Date(dateInput);
+  if (isNaN(date.getTime())) return "";
+
+  return new Intl.DateTimeFormat(locale, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(date);
+}
+

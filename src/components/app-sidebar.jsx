@@ -6,14 +6,10 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import useUser from "@/features/auth/useUser";
 import {useAppTranslation} from "@/i18n/use-app-translation";
 import {RiUserSettingsLine} from "@remixicon/react";
-import {Link} from "react-router-dom";
 import {doctorNavLinks, receptionistNavLinks} from "@/config/navigation";
 import {PATHS} from "@/config/paths";
 
@@ -62,19 +58,12 @@ export function AppSidebar({...props}) {
 
   return (
     <Sidebar collapsible="offcanvas" side={activeSide} {...props}>
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:p-1.5!"
-              dir="ltr">
-              <Link to="/">
-                <span className="text-base font-semibold">Eyan.</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+      <SidebarHeader className="flex items-center justify-center py-5 border-b border-sidebar-border/50">
+        <img
+          src="/eyan-logo2.png"
+          alt="Eyan Logo"
+          className="h-14 w-auto object-contain drop-shadow-xs select-none pointer-events-none"
+        />
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={mappedNavMain} />

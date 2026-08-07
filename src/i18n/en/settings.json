@@ -1,5 +1,6 @@
 {
   "title": "Settings",
+  "subtitle": "Configure clinic system settings and regional defaults",
   "regional": {
     "title": "Regional Settings",
     "description": "Select your country to set the clinic's default currency and localization preferences.",

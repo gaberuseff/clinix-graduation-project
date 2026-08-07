@@ -1,11 +1,11 @@
+import {PATH_SEGMENTS, PATHS} from "@/config/paths";
 import {lazy, Suspense} from "react";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import ProtectedRoutes from "./components/ownUI/ProtectedRoutes";
 import {Spinner} from "./components/ui/spinner";
-import PublicLayout from "./features/public/PublicLayout";
 import DoctorLayout from "./Layouts/DoctorLayout";
+import PublicLayout from "./Layouts/PublicLayout";
 import SecretaryLayout from "./Layouts/SecretaryLayout";
-import {PATHS, PATH_SEGMENTS} from "@/config/paths";
 
 // Lazy-loaded pages (Code-Splitting)
 const Appointments = lazy(() => import("./pages/Appointments"));
@@ -15,9 +15,11 @@ const Patients = lazy(() => import("./pages/Patients"));
 const Register = lazy(() => import("./pages/Register"));
 const Secretaries = lazy(() => import("./pages/Secretaries"));
 const Settings = lazy(() => import("./pages/Settings"));
-const Discounts = lazy(() => import("./pages/Discounts"));
 const Preferences = lazy(() => import("./pages/Preferences"));
 const Visits = lazy(() => import("./pages/Visits"));
+const DoctorDashboard = lazy(() => import("./pages/DoctorDashboard"));
+const SecretaryDashboard = lazy(() => import("./pages/SecretaryDashboard"));
+const Finance = lazy(() => import("./pages/Finance"));
 
 function PageLoader() {
   return (
@@ -46,7 +48,7 @@ function AppRoutes() {
               />
               <Route
                 path={PATH_SEGMENTS.dashboard}
-                element={<h1>Doctor Dashboard</h1>}
+                element={<DoctorDashboard />}
               />
               <Route path={PATH_SEGMENTS.patients} element={<Patients />} />
               <Route path={PATH_SEGMENTS.secretary} element={<Secretaries />} />
@@ -55,10 +57,7 @@ function AppRoutes() {
                 element={<h1>Patient Details</h1>}
               />
               <Route path={PATH_SEGMENTS.visits} element={<Visits />} />
-              <Route
-                path={PATH_SEGMENTS.finance}
-                element={<h1>Doctor Finance</h1>}
-              />
+              <Route path={PATH_SEGMENTS.finance} element={<Finance />} />
               <Route path={PATH_SEGMENTS.settings} element={<Settings />} />
               <Route
                 path={PATH_SEGMENTS.preferences}
@@ -75,17 +74,13 @@ function AppRoutes() {
               />
               <Route
                 path={PATH_SEGMENTS.dashboard}
-                element={<h1>Receptionist Dashboard</h1>}
+                element={<SecretaryDashboard />}
               />
               <Route
                 path={PATH_SEGMENTS.appointments}
                 element={<Appointments />}
               />
               <Route path={PATH_SEGMENTS.patients} element={<Patients />} />
-              <Route
-                path={PATH_SEGMENTS.payments}
-                element={<h1>Daily Payments</h1>}
-              />
               <Route
                 path={PATH_SEGMENTS.preferences}
                 element={<Preferences />}

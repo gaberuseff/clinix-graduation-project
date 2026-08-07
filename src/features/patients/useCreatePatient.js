@@ -16,6 +16,12 @@ function useCreatePatient() {
         queryClient.invalidateQueries({
           queryKey: ["patients"],
         });
+        queryClient.invalidateQueries({
+          queryKey: ["patients-stats"],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["secretary_dashboard_stats"],
+        });
       },
     });
 

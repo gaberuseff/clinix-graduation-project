@@ -1,94 +1,51 @@
-import React from "react";
-import {Card, CardHeader, CardContent} from "@/components/ui/card";
 import {useAppTranslation} from "@/i18n/use-app-translation";
+import {Mars, Users, Venus} from "lucide-react";
+import PatientsStat from "./PatientsStat";
+import usePatientsStats from "./usePatientsStats";
 
-function PatientsStats({patients, isLoadingPatients}) {
+function PatientsStats() {
   const {t} = useAppTranslation("patients");
+  const {stats, isLoadingStats} = usePatientsStats();
 
-  // Dynamic statistics calculations
-  const totalPatients = patients?.length || 0;
-  const maleCount = patients?.filter((p) => p.gender === "male")?.length || 0;
-  const femaleCount =
-    patients?.filter((p) => p.gender === "female")?.length || 0;
+  const totalPatients = stats?.total_count || 0;
+  const maleCount = stats?.male_count || 0;
+  const femaleCount = stats?.female_count || 0;
 
   return (
     <div className="grid gap-4 grid-cols-1 sm:grid-cols-3">
-      {/* Total Patients */}
-      <Card
-        size="sm"
-        className="bg-muted/20 dark:bg-muted/5 border-none shadow-none ring-1 ring-border/50">
-        <CardHeader className="pb-2">
-          <span className="text-xs font-semibold text-muted-foreground tracking-wide">
-            {t("stats.totalPatients")}
-          </span>
-        </CardHeader>
-        <CardContent className="flex items-baseline justify-between">
-          <span className="text-2xl font-bold tracking-tight">
-            {isLoadingPatients ? (
-              <span className="inline-block w-8 h-6 bg-muted animate-pulse rounded-md" />
-            ) : (
-              totalPatients
-            )}
-          </span>
-          <span className="text-[10px] text-muted-foreground font-medium">
-            {t("stats.registered")}
-          </span>
-        </CardContent>
-      </Card>
+      <PatientsStat
+        title={t("stats.totalPatients")}
+        value={totalPatients}
+        subtext={t("stats.registered")}
+        isLoading={isLoadingStats}
+        icon={Users}
+      />
 
-      {/* Male Patients */}
-      <Card
-        size="sm"
-        className="bg-muted/20 dark:bg-muted/5 border-none shadow-none ring-1 ring-border/50">
-        <CardHeader className="pb-2">
-          <span className="text-xs font-semibold text-muted-foreground tracking-wide flex items-center gap-1.5">
-            <span className="size-2 rounded-full bg-blue-500" />
-            {t("stats.malePatients")}
-          </span>
-        </CardHeader>
-        <CardContent className="flex items-baseline justify-between">
-          <span className="text-2xl font-bold tracking-tight text-blue-600 dark:text-blue-400">
-            {isLoadingPatients ? (
-              <span className="inline-block w-8 h-6 bg-muted animate-pulse rounded-md" />
-            ) : (
-              maleCount
-            )}
-          </span>
-          <span className="text-[10px] text-muted-foreground font-medium">
-            {totalPatients > 0
-              ? `${Math.round((maleCount / totalPatients) * 100)}%`
-              : "0%"}{" "}
-            {t("stats.ofTotal")}
-          </span>
-        </CardContent>
-      </Card>
+      <PatientsStat
+        title={t("stats.malePatients")}
+        value={maleCount}
+        subtext={
+          totalPatients > 0
+            ? `${Math.round((maleCount / totalPatients) * 100)}% ${t("stats.ofTotal")}`
+            : `0% ${t("stats.ofTotal")}`
+        }
+        isLoading={isLoadingStats}
+        icon={Mars}
+        valueClass="text-blue-600 dark:text-blue-400"
+      />
 
-      {/* Female Patients */}
-      <Card
-        size="sm"
-        className="bg-muted/20 dark:bg-muted/5 border-none shadow-none ring-1 ring-border/50">
-        <CardHeader className="pb-2">
-          <span className="text-xs font-semibold text-muted-foreground tracking-wide flex items-center gap-1.5">
-            <span className="size-2 rounded-full bg-pink-500" />
-            {t("stats.femalePatients")}
-          </span>
-        </CardHeader>
-        <CardContent className="flex items-baseline justify-between">
-          <span className="text-2xl font-bold tracking-tight text-pink-600 dark:text-pink-400">
-            {isLoadingPatients ? (
-              <span className="inline-block w-8 h-6 bg-muted animate-pulse rounded-md" />
-            ) : (
-              femaleCount
-            )}
-          </span>
-          <span className="text-[10px] text-muted-foreground font-medium">
-            {totalPatients > 0
-              ? `${Math.round((femaleCount / totalPatients) * 100)}%`
-              : "0%"}{" "}
-            {t("stats.ofTotal")}
-          </span>
-        </CardContent>
-      </Card>
+      <PatientsStat
+        title={t("stats.femalePatients")}
+        value={femaleCount}
+        subtext={
+          totalPatients > 0
+            ? `${Math.round((femaleCount / totalPatients) * 100)}% ${t("stats.ofTotal")}`
+            : `0% ${t("stats.ofTotal")}`
+        }
+        isLoading={isLoadingStats}
+        icon={Venus}
+        valueClass="text-pink-600 dark:text-pink-400"
+      />
     </div>
   );
 }

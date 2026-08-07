@@ -6,10 +6,12 @@
     "patients": "المرضى",
     "secretaries": "السكرتارية",
     "discounts": "أكواد الخصم",
+    "discountsSubtitle": "إنشاء وإدارة أكواد خصم ترويجية لخدمات الكشف",
     "settings": "الإعدادات",
     "help": "المساعدة",
     "preferences": "التفضيلات",
     "visits": "الكشوفات",
+    "visitsSubtitle": "إدارة كشوفات المرضى والاستشارات الحالية النشطة",
     "prescriptions": "أرشيف الروشتات",
     "finance": "المالية والتقارير",
     "booking": "حجز موعد",
@@ -27,5 +29,23 @@
   },
   "header": {
     "greeting": "يومك سعيد، {{name}}"
+  },
+  "stats": {
+    "todayTotal": "حجوزات اليوم",
+    "todayPending": "الحجوزات المعلقة",
+    "todayCompleted": "الحجوزات المكتملة",
+    "todayCancelled": "الحجوزات الملغاة",
+    "totalRevenue": "إجمالي الإيرادات المكتملة",
+    "todayRevenue": "إيرادات اليوم المكتملة",
+    "totalPatients": "إجمالي المرضى",
+    "chartTitle": "نشاط الحجوزات والمواعيد",
+    "chartSubtitle": "مخطط بياني يوضح إجمالي المواعيد والمكتمل منها خلال آخر 7 أيام"
+  },
+  "secretaryDashboard": {
+    "quickActions": "إجراءات سريعة",
+    "todayAppointments": "مواعيد اليوم",
+    "recentPatients": "المرضى المسجلون حديثاً",
+    "noAppointments": "لا توجد مواعيد مسجلة لليوم",
+    "noRecentPatients": "لا يوجد مرضى مسجلين مؤخراً"
   }
 }

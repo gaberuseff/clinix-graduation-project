@@ -13,6 +13,7 @@ function useDeletePatient() {
       mutationFn: deletePatientApi,
       onSuccess: () => {
         queryClient.invalidateQueries({queryKey: ["patients"]});
+        queryClient.invalidateQueries({queryKey: ["patients-stats"]});
         toast.success(t("toasts.deleteSuccess"), {id: "delete_patient"});
       },
     });
@@ -36,12 +37,9 @@ function useDeletePatient() {
         return old.filter((patient) => patient.id !== id);
       });
 
-      toast.success(
-        t("toasts.deleteOffline"),
-        {
-          id: "delete_patient_offline",
-        },
-      );
+      toast.success(t("toasts.deleteOffline"), {
+        id: "delete_patient_offline",
+      });
 
       if (options.onSuccess) {
         options.onSuccess();
