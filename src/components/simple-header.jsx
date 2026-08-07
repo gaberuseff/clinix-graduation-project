@@ -11,10 +11,12 @@ import {Button, buttonVariants} from "@/components/ui/button";
 import useUser from "@/features/auth/useUser";
 import React from "react";
 import {Link} from "react-router-dom";
+import {PATHS} from "@/config/paths";
 
 export function Header() {
   const [open, setOpen] = React.useState(false);
-  const {isAuthenticated, isPending} = useUser();
+  const {isAuthenticated, isPending, role} = useUser();
+  const dashboardPath = role === "secretary" ? PATHS.secretary.dashboard : PATHS.doctor.dashboard;
 
   const links = [
     {
@@ -51,7 +53,7 @@ export function Header() {
           ))}
           {!isPending &&
             (isAuthenticated ? (
-              <Link to="/dashboard">
+              <Link to={dashboardPath}>
                 <Button>Dashboard</Button>
               </Link>
             ) : (
@@ -102,7 +104,7 @@ export function Header() {
               {!isPending &&
                 (isAuthenticated ? (
                   <Link
-                    to="/dashboard"
+                    to={dashboardPath}
                     onClick={() => setOpen(false)}
                     className="w-full">
                     <Button className="w-full">Dashboard</Button>
