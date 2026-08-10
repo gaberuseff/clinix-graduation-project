@@ -4,6 +4,7 @@
   "searchPlaceholder": "ابحث برقم هاتف المريض أو اسمه...",
   "searchBtn": "بحث",
   "clearSearch": "مسح البحث",
+  "refreshTooltip": "تحديث البيانات",
   "tabs": {
     "todayAppointments": "حجوزات اليوم",
     "todayVisits": "كشوفات اليوم",

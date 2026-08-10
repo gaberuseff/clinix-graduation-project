@@ -20,6 +20,12 @@
       "pending": "قيد الانتظار",
       "completed": "مكتمل",
       "cancelled": "ملغي"
+    },
+    "dateFilters": {
+      "today": "اليوم",
+      "tomorrow": "غداً",
+      "dayAfterTomorrow": "بعد غد",
+      "all": "الكل"
     }
   },
   "buttons": {

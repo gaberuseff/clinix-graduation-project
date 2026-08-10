@@ -1,10 +1,13 @@
 import {getClinicAppointments} from "@/services/apiAppointments";
-import {useQuery} from "@tanstack/react-query";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
 import useUser from "@/features/auth/useUser";
 import {useSearchParams} from "react-router-dom";
+import {useEffect} from "react";
 import {PAGE_SIZE} from "@/utils/constants";
+import {supabase} from "@/services/supabase";
 
 function useTodayAppointments() {
+  const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
   const query = searchParams.get("search") || "";
   const status = searchParams.get("status") || "all";
@@ -24,10 +27,39 @@ function useTodayAppointments() {
     queryKey: ["today-appointments", clinicId, query, status, page],
     queryFn: () => getClinicAppointments({clinicId, query, page, status}),
     enabled: !!clinicId,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
+    staleTime: 0, // Serve cache instantly but always fetch in background to check for updates
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
     retry: 1,
   });
+
+  // Subscribe to real-time updates for today's clinic appointments
+  useEffect(() => {
+    if (!clinicId) return;
+
+    const channel = supabase
+      .channel(`realtime-today-appointments-${clinicId}-${Math.random().toString(36).substring(2, 9)}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "appointments",
+          filter: `clinic_id=eq.${clinicId}`,
+        },
+        () => {
+          // Invalidate the cache to trigger active queries to refetch
+          queryClient.invalidateQueries({
+            queryKey: ["today-appointments", clinicId],
+          });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [clinicId, queryClient]);
 
   return {
     appointments: data?.data || [],

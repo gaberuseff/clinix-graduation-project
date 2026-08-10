@@ -20,6 +20,12 @@
       "pending": "Pending",
       "completed": "Completed",
       "cancelled": "Cancelled"
+    },
+    "dateFilters": {
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "dayAfterTomorrow": "Day After Tomorrow",
+      "all": "All"
     }
   },
   "buttons": {

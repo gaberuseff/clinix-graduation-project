@@ -4,6 +4,7 @@
   "searchPlaceholder": "Search by patient phone number or name...",
   "searchBtn": "Search",
   "clearSearch": "Clear Search",
+  "refreshTooltip": "Refresh data",
   "tabs": {
     "todayAppointments": "Today's Appointments",
     "todayVisits": "Today's Visits",

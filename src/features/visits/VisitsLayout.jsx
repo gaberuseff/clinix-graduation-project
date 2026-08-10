@@ -17,6 +17,8 @@ import PatientHistoryTimeline from "./PatientHistoryTimeline";
 import CreateVisitDrawer from "./CreateVisitDrawer";
 import {useState, useEffect} from "react";
 import {useSearchParams} from "react-router-dom";
+import {useQueryClient, useIsFetching} from "@tanstack/react-query";
+import {RiRefreshLine} from "@remixicon/react";
 
 function VisitsLayout() {
   const {t} = useAppTranslation("visits");
@@ -28,6 +30,32 @@ function VisitsLayout() {
   const [activeTab, setActiveTab] = useState(
     searchParams.get("phone") ? "history" : "today",
   );
+
+  const queryClient = useQueryClient();
+
+  const isFetchingTodayAppointments = useIsFetching({ queryKey: ["today-appointments"] }) > 0;
+  const isFetchingTodayVisits = useIsFetching({ queryKey: ["today-visits"] }) > 0;
+  const isFetchingHistory = useIsFetching({ queryKey: ["medical_records"] }) > 0 || useIsFetching({ queryKey: ["patient-info"] }) > 0;
+
+  const isFetching =
+    activeTab === "today"
+      ? isFetchingTodayAppointments
+      : activeTab === "completed"
+        ? isFetchingTodayVisits
+        : activeTab === "history"
+          ? isFetchingHistory
+          : false;
+
+  const handleRefetch = () => {
+    if (activeTab === "today") {
+      queryClient.invalidateQueries({ queryKey: ["today-appointments"] });
+    } else if (activeTab === "completed") {
+      queryClient.invalidateQueries({ queryKey: ["today-visits"] });
+    } else if (activeTab === "history") {
+      queryClient.invalidateQueries({ queryKey: ["medical_records"] });
+      queryClient.invalidateQueries({ queryKey: ["patient-info"] });
+    }
+  };
 
   useEffect(() => {
     const urlPhone = searchParams.get("phone") || searchParams.get("search");
@@ -88,6 +116,21 @@ function VisitsLayout() {
               </button>
             )}
           </form>
+
+          {/* Refetch Button */}
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={handleRefetch}
+            disabled={isFetching || (activeTab === "history" && phoneSearch.trim().length <= 2)}
+            className="shrink-0"
+            title={t("refreshTooltip")}>
+            <RiRefreshLine
+              className={`size-4 text-muted-foreground ${
+                isFetching ? "animate-spin text-primary" : ""
+              }`}
+            />
+          </Button>
 
           {/* Create Visit Button */}
           <CreateVisitDrawer showTrigger={true} />

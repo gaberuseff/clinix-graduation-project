@@ -1,20 +1,30 @@
 import {supabase} from "./supabase";
 import {PAGE_SIZE} from "@/utils/constants";
 
-export async function getClinicAppointments({clinicId, query, page, status}) {
+export async function getClinicAppointments({clinicId, query, page, status, dateFilter}) {
   let queryBuilder = supabase
     .from("appointments")
     .select("*", {count: "exact"})
     .eq("clinic_id", clinicId);
 
-  // Filter for today's bookings only (based on local timezone)
-  const now = new Date();
-  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0).toISOString();
-  const todayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999).toISOString();
+  // Filter based on the chosen day (defaults to today)
+  const filter = dateFilter || "today";
 
-  queryBuilder = queryBuilder
-    .gte("date", todayStart)
-    .lte("date", todayEnd);
+  if (filter !== "all") {
+    const targetDate = new Date();
+    if (filter === "tomorrow") {
+      targetDate.setDate(targetDate.getDate() + 1);
+    } else if (filter === "dayAfterTomorrow") {
+      targetDate.setDate(targetDate.getDate() + 2);
+    }
+
+    const dayStart = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate(), 0, 0, 0, 0).toISOString();
+    const dayEnd = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate(), 23, 59, 59, 999).toISOString();
+
+    queryBuilder = queryBuilder
+      .gte("date", dayStart)
+      .lte("date", dayEnd);
+  }
 
   if (status && status !== "all") {
     queryBuilder = queryBuilder.eq("status", status);
