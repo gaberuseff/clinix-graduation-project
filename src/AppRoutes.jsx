@@ -20,6 +20,7 @@ const Visits = lazy(() => import("./pages/Visits"));
 const DoctorDashboard = lazy(() => import("./pages/DoctorDashboard"));
 const SecretaryDashboard = lazy(() => import("./pages/SecretaryDashboard"));
 const Finance = lazy(() => import("./pages/Finance"));
+const LandingPage = lazy(() => import("./pages/LandingPage"));
 
 function PageLoader() {
   return (
@@ -35,7 +36,7 @@ function AppRoutes() {
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route element={<PublicLayout />}>
-            <Route path={PATHS.root} element={<h1>Hello</h1>} />
+            <Route path={PATHS.root} element={<LandingPage />} />
             <Route path={PATHS.login} element={<Login />} />
             <Route path={PATHS.register} element={<Register />} />
           </Route>

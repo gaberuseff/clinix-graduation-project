@@ -1,8 +1,9 @@
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {useAppTranslation} from "@/i18n/use-app-translation";
 import {RiStethoscopeLine, RiRefreshLine} from "@remixicon/react";
+import {formatCurrency} from "@/utils/helpers";
 
-function FinanceBreakdown({stats}) {
+function FinanceBreakdown({stats, currency}) {
   const {t} = useAppTranslation("finance");
 
   const checkupCount = stats?.checkup_count || 0;
@@ -44,7 +45,7 @@ function FinanceBreakdown({stats}) {
             </div>
             <div className="text-end">
               <p className="text-xs font-bold text-foreground">
-                {checkupRevenue.toLocaleString("ar-EG")} ج.م
+                {formatCurrency(checkupRevenue, currency)}
               </p>
               <p className="text-[10px] text-muted-foreground">
                 {checkupPercent}% {t("breakdown.percentage")}
@@ -77,7 +78,7 @@ function FinanceBreakdown({stats}) {
             </div>
             <div className="text-end">
               <p className="text-xs font-bold text-foreground">
-                {followupRevenue.toLocaleString("ar-EG")} ج.م
+                {formatCurrency(followupRevenue, currency)}
               </p>
               <p className="text-[10px] text-muted-foreground">
                 {followupPercent}% {t("breakdown.percentage")}
@@ -95,7 +96,7 @@ function FinanceBreakdown({stats}) {
         {/* Total Summary */}
         <div className="pt-4 border-t border-border/20 flex items-center justify-between text-xs font-bold text-foreground">
           <span>المجموع الكلي:</span>
-          <span>{totalRevenue.toLocaleString("ar-EG")} ج.م</span>
+          <span>{formatCurrency(totalRevenue, currency)}</span>
         </div>
       </CardContent>
     </Card>

@@ -1,3 +1,5 @@
+import {formatCurrency} from "./helpers";
+
 /**
  * Utility to generate a beautifully styled, print-optimized financial report in a hidden iframe
  */
@@ -6,6 +8,7 @@ export function printFinanceReport({
   doctorName,
   dateRange,
   stats,
+  currency,
   t,
 }) {
   const iframe = document.createElement("iframe");
@@ -54,7 +57,7 @@ export function printFinanceReport({
           ${tx.status === "completed" ? "تم الكشف" : tx.status === "cancelled" ? "ملغى" : "في الانتظار"}
         </td>
         <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: left; font-weight: bold;">
-          ${Number(tx.price).toLocaleString("ar-EG")} ج.م
+          ${formatCurrency(tx.price, currency)}
         </td>
       </tr>
     `
@@ -229,21 +232,21 @@ export function printFinanceReport({
         <div class="kpi-card" style="border-right: 4px solid #10b981;">
           <div class="kpi-title">الحجوزات المكتملة</div>
           <div class="kpi-val">${completedCount}</div>
-          <div class="kpi-sub">المجموع: <strong>${completedRevenue.toLocaleString("ar-EG")} ج.م</strong></div>
+          <div class="kpi-sub">المجموع: <strong>${formatCurrency(completedRevenue, currency)}</strong></div>
         </div>
         <div class="kpi-card" style="border-right: 4px solid #ef4444;">
           <div class="kpi-title">الحجوزات الملغاة</div>
           <div class="kpi-val">${cancelledCount}</div>
-          <div class="kpi-sub">الخسارة: <strong>${cancelledRevenue.toLocaleString("ar-EG")} ج.م</strong></div>
+          <div class="kpi-sub">الخسارة: <strong>${formatCurrency(cancelledRevenue, currency)}</strong></div>
         </div>
         <div class="kpi-card" style="border-right: 4px solid #f59e0b;">
           <div class="kpi-title">الحجوزات المعلقة</div>
           <div class="kpi-val">${pendingCount}</div>
-          <div class="kpi-sub">المتوقع: <strong>${pendingRevenue.toLocaleString("ar-EG")} ج.م</strong></div>
+          <div class="kpi-sub">المتوقع: <strong>${formatCurrency(pendingRevenue, currency)}</strong></div>
         </div>
         <div class="kpi-card" style="border-right: 4px solid #3b82f6;">
           <div class="kpi-title">متوسط دخل الكشف</div>
-          <div class="kpi-val">${Number(averageTicket).toLocaleString("ar-EG")} ج.م</div>
+          <div class="kpi-val">${formatCurrency(averageTicket, currency)}</div>
           <div class="kpi-sub">لكل خدمة مكتملة</div>
         </div>
       </div>
@@ -262,14 +265,14 @@ export function printFinanceReport({
             <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: right;">كشف جديد (Checkup)</td>
             <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: center;">${checkupCount}</td>
             <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: left; font-weight: bold;">
-              ${checkupRevenue.toLocaleString("ar-EG")} ج.م
+              ${formatCurrency(checkupRevenue, currency)}
             </td>
           </tr>
           <tr>
             <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: right;">استشارة / إعادة (Follow-up)</td>
             <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: center;">${followupCount}</td>
             <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: left; font-weight: bold;">
-              ${followupRevenue.toLocaleString("ar-EG")} ج.م
+              ${formatCurrency(followupRevenue, currency)}
             </td>
           </tr>
         </tbody>

@@ -43,7 +43,6 @@ export async function updateClinicSettings({clinicId, updatedFields}) {
 }
 
 const CACHE_KEY_PREFIX = "clinic_settings_cache_";
-const TWO_HOURS = 2 * 60 * 60 * 1000; // 2 hours in ms
 
 export async function getClinicSettingsCached(clinicId) {
   if (!clinicId) return null;
@@ -51,30 +50,32 @@ export async function getClinicSettingsCached(clinicId) {
 
   try {
     const cached = await get(cacheKey);
-    const now = Date.now();
 
-    // If online, check cache freshness (2 hours)
     if (navigator.onLine) {
-      if (cached && (now - cached.timestamp < TWO_HOURS)) {
-        return cached.settings;
-      }
-
-      const settings = await getClinicSettings(clinicId);
-      if (settings) {
-        await set(cacheKey, {
-          settings,
-          timestamp: now,
-        });
-        return settings;
+      try {
+        const settings = await getClinicSettings(clinicId);
+        if (settings) {
+          await set(cacheKey, {
+            settings,
+            timestamp: Date.now(),
+          });
+          return settings;
+        }
+      } catch (err) {
+        console.error("Failed to fetch fresh settings, falling back to cache:", err);
       }
     }
 
-    // If offline or fetch failed, return cached (even if expired)
+    // If offline or fetch failed, return cached
     return cached ? cached.settings : null;
   } catch (error) {
     console.error("Error in getClinicSettingsCached:", error);
     if (navigator.onLine) {
-      return await getClinicSettings(clinicId);
+      try {
+        return await getClinicSettings(clinicId);
+      } catch (netErr) {
+        console.error("Fallback network fetch also failed:", netErr);
+      }
     }
     return null;
   }

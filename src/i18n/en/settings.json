@@ -23,5 +23,16 @@
   "notifications": {
     "success": "Settings updated successfully!",
     "error": "Failed to update settings"
+  },
+  "openingHours": {
+    "title": "Clinic Opening Hours",
+    "description": "Define the working days and opening/closing hours of the clinic.",
+    "day": "Day",
+    "status": "Status",
+    "open": "Open",
+    "closed": "Closed",
+    "from": "From",
+    "to": "To",
+    "submit": "Save Opening Hours"
   }
 }

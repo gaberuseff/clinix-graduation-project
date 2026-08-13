@@ -1,6 +1,7 @@
 import {useAppTranslation} from "@/i18n/use-app-translation";
 import ClinicPricesForms from "./ClinicPricesForms";
 import ClinicRegionalSettingsForm from "./ClinicRegionalSettingsForm";
+import ClinicOpeningHoursForm from "./ClinicOpeningHoursForm";
 import PageHeader from "@/components/ownUI/PageHeader";
 import {Settings} from "lucide-react";
 
@@ -16,6 +17,7 @@ function SettingsLayout() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <ClinicRegionalSettingsForm />
         <ClinicPricesForms />
+        <ClinicOpeningHoursForm />
       </div>
     </div>
   );

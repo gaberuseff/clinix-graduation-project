@@ -10,8 +10,9 @@ import {
 import {useAppTranslation} from "@/i18n/use-app-translation";
 import {RiPhoneLine, RiFileListLine, RiCheckDoubleLine, RiCloseCircleLine, RiTimeLine} from "@remixicon/react";
 import {TextState} from "@/components/ownUI/TextState";
+import {formatCurrency} from "@/utils/helpers";
 
-function FinanceTransactionsTable({transactions = []}) {
+function FinanceTransactionsTable({transactions = [], currency}) {
   const {t} = useAppTranslation(["finance", "visits"]);
 
   if (!transactions || transactions.length === 0) {
@@ -138,7 +139,7 @@ function FinanceTransactionsTable({transactions = []}) {
 
                   {/* Fee */}
                   <TableCell className="py-3 pe-4 text-end font-bold text-foreground/90">
-                    {Number(tx.price).toLocaleString("ar-EG")} ج.م
+                    {formatCurrency(tx.price, currency)}
                   </TableCell>
                 </TableRow>
               );

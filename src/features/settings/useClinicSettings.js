@@ -1,5 +1,5 @@
 import {useQuery} from "@tanstack/react-query";
-import {getClinicSettings} from "@/services/apiSettings";
+import {getClinicSettingsCached} from "@/services/apiSettings";
 import useUser from "@/features/auth/useUser";
 
 function useClinicSettings() {
@@ -12,9 +12,9 @@ function useClinicSettings() {
     error,
   } = useQuery({
     queryKey: ["settings", clinicId],
-    queryFn: () => getClinicSettings(clinicId),
+    queryFn: () => getClinicSettingsCached(clinicId),
     enabled: !!clinicId,
-    refetchOnMount: false,
+    staleTime: 0,
     refetchOnWindowFocus: false,
   });
 

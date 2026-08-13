@@ -10,10 +10,13 @@ import FinanceRevenueChart from "./FinanceRevenueChart";
 import FinanceBreakdown from "./FinanceBreakdown";
 import FinanceTransactionsTable from "./FinanceTransactionsTable";
 import {printFinanceReport} from "@/utils/printFinanceReport";
+import useClinicSettingsCached from "@/features/settings/useClinicSettingsCached";
 
 function FinanceLayout() {
   const {t} = useAppTranslation("finance");
   const {user} = useUser();
+  const {settings} = useClinicSettingsCached();
+  const currency = settings?.price_currency || "EGP";
 
   const [filterType, setFilterType] = useState("last30Days");
   const [customRange, setCustomRange] = useState({
@@ -30,6 +33,7 @@ function FinanceLayout() {
       doctorName: user?.user_metadata?.full_name || "الطبيب المعالج",
       dateRange,
       stats,
+      currency,
       t,
     });
   }
@@ -132,7 +136,7 @@ function FinanceLayout() {
       ) : (
         <div className="space-y-6">
           {/* KPI Summary Cards */}
-          <FinanceStatsGrid stats={stats} />
+          <FinanceStatsGrid stats={stats} currency={currency} />
 
           {/* Charts & Breakdown Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -143,12 +147,12 @@ function FinanceLayout() {
 
             {/* Service breakdown info */}
             <div>
-              <FinanceBreakdown stats={stats} />
+              <FinanceBreakdown stats={stats} currency={currency} />
             </div>
           </div>
 
           {/* Transactions List */}
-          <FinanceTransactionsTable transactions={stats?.recent_transactions} />
+          <FinanceTransactionsTable transactions={stats?.recent_transactions} currency={currency} />
         </div>
       )}
     </div>
