@@ -67,9 +67,10 @@ function VisitsLayout() {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (phoneSearch.trim()) {
+    const cleanSearch = String(phoneSearch || "").trim();
+    if (cleanSearch) {
       const nextParams = new URLSearchParams(searchParams);
-      nextParams.set("phone", phoneSearch.trim());
+      nextParams.set("phone", cleanSearch);
       setSearchParams(nextParams);
       setActiveTab("history");
     }
@@ -122,7 +123,7 @@ function VisitsLayout() {
             variant="outline"
             size="icon"
             onClick={handleRefetch}
-            disabled={isFetching || (activeTab === "history" && phoneSearch.trim().length <= 2)}
+            disabled={isFetching || (activeTab === "history" && String(phoneSearch || "").trim().length <= 2)}
             className="shrink-0"
             title={t("refreshTooltip")}>
             <RiRefreshLine

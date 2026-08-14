@@ -129,25 +129,25 @@ function CreateVisitDrawer({
     if (!clinicId) return;
 
     const cleanedPrescription = (data.prescription || [])
-      .filter((item) => item.medication && item.medication.trim() !== "")
+      .filter((item) => item.medication && String(item.medication).trim() !== "")
       .map((item, idx) => ({
         id: item.id || `med-${Date.now()}-${idx}`,
-        medication: item.medication.trim(),
-        strength: item.strength ? item.strength.trim() : "",
-        frequency: item.frequency ? item.frequency.trim() : "",
-        duration: item.duration ? item.duration.trim() : "",
+        medication: String(item.medication).trim(),
+        strength: item.strength ? String(item.strength).trim() : "",
+        frequency: item.frequency ? String(item.frequency).trim() : "",
+        duration: item.duration ? String(item.duration).trim() : "",
       }));
 
     const visitPayload = {
       clinic_id: clinicId,
-      patient_name: data.patient_name.trim(),
-      patient_phone: data.patient_phone.trim(),
+      patient_name: String(data.patient_name).trim(),
+      patient_phone: String(data.patient_phone).trim(),
       visit_type: data.visit_type,
-      diagnosis: data.diagnosis.trim(),
-      doctor_notes: data.doctor_notes ? data.doctor_notes.trim() : "",
+      diagnosis: String(data.diagnosis).trim(),
+      doctor_notes: data.doctor_notes ? String(data.doctor_notes).trim() : "",
       prescription: cleanedPrescription,
       appointment_id: appointmentId || defaultPatient?.id || null,
-      patient_id: defaultPatient?.patient_id || defaultPatient?.id || null,
+      patient_id: defaultPatient?.patient_id || null,
     };
 
     if (isEditSession) {

@@ -6,7 +6,7 @@ function usePatientHistory(phone) {
   const {user} = useUser();
   const clinicId = user?.user_metadata?.clinic_id;
 
-  const cleanPhone = phone ? phone.trim() : "";
+  const cleanPhone = phone ? String(phone).trim() : "";
 
   const {
     data: history = [],
@@ -30,7 +30,7 @@ function usePatientHistory(phone) {
   });
 
   return {
-    history,
+    history: history || [],
     patientInfo,
     isLoading: isLoadingHistory || isLoadingPatient,
     historyError,

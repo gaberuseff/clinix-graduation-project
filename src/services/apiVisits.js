@@ -6,7 +6,7 @@ import {supabase} from "./supabase";
 export async function getPatientMedicalRecords({clinicId, phone}) {
   if (!clinicId || !phone) return [];
 
-  const cleanPhone = phone.trim();
+  const cleanPhone = String(phone).trim();
 
   const {data, error} = await supabase
     .from("medical_records")
@@ -83,7 +83,7 @@ export async function deleteMedicalRecord({id}) {
 export async function findPatientByPhone({clinicId, phone}) {
   if (!clinicId || !phone) return null;
 
-  const cleanPhone = phone.trim();
+  const cleanPhone = String(phone).trim();
 
   const {data, error} = await supabase
     .from("patients")

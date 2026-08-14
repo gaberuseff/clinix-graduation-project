@@ -1,5 +1,6 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {createMedicalRecord} from "@/services/apiVisits";
+import {createMedicalRecord, findPatientByPhone} from "@/services/apiVisits";
+import {createPatient} from "@/services/apiPatients";
 import {updateAppointmentStatus} from "@/services/apiAppointments";
 import {toast} from "react-hot-toast";
 import {addToOfflineVisitsQueue} from "@/services/offlineSync";
@@ -11,12 +12,48 @@ function useCreateVisit() {
 
   const {mutateAsync: createVisitMutation, isPending: isCreating} = useMutation({
     mutationFn: async (visitData) => {
-      const result = await createMedicalRecord(visitData);
+      let resolvedPatientId = visitData.patient_id;
+
+      // If patient_id is not valid (null, undefined, matches the appointment_id, or starts with "temp-")
+      const isInvalidPatientId =
+        !resolvedPatientId ||
+        resolvedPatientId === visitData.appointment_id ||
+        String(resolvedPatientId).startsWith("temp-");
+
+      if (isInvalidPatientId) {
+        // Look up patient by phone number in Supabase
+        const existingPatient = await findPatientByPhone({
+          clinicId: visitData.clinic_id,
+          phone: visitData.patient_phone,
+        });
+
+        if (existingPatient) {
+          resolvedPatientId = existingPatient.id;
+        } else {
+          // Patient doesn't exist, create patient record using phone and name
+          const newPatient = await createPatient({
+            clinic_id: visitData.clinic_id,
+            name: visitData.patient_name,
+            phone: visitData.patient_phone,
+            gender: "male", // default gender matching offline sync
+            is_active: true,
+          });
+          resolvedPatientId = newPatient.id;
+        }
+      }
+
+      // Update visitData with the resolved patient_id
+      const finalVisitData = {
+        ...visitData,
+        patient_id: resolvedPatientId,
+      };
+
+      const result = await createMedicalRecord(finalVisitData);
       
-      if (visitData.appointment_id && !String(visitData.appointment_id).startsWith("temp-")) {
+      if (finalVisitData.appointment_id && !String(finalVisitData.appointment_id).startsWith("temp-")) {
         try {
           await updateAppointmentStatus({
-            id: visitData.appointment_id,
+            id: finalVisitData.appointment_id,
             status: "completed",
           });
         } catch (err) {
@@ -51,7 +88,7 @@ function useCreateVisit() {
         visitData: newVisit,
       });
 
-      const phoneKey = newVisit.patient_phone?.trim();
+      const phoneKey = newVisit.patient_phone ? String(newVisit.patient_phone).trim() : "";
       if (phoneKey) {
         queryClient.setQueriesData({queryKey: ["medical_records"]}, (old) => {
           if (!old) return [offlineVisit];

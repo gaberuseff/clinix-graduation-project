@@ -19,12 +19,12 @@ import CreateVisitDrawer from "./CreateVisitDrawer";
 
 function PatientHistoryTimeline({phone}) {
   const {t} = useAppTranslation("visits");
-  const {history, patientInfo, isLoading} = usePatientHistory(phone);
+  const {history = [], patientInfo, isLoading} = usePatientHistory(phone);
 
   const [visitToEdit, setVisitToEdit] = useState(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
-  if (!phone || phone.trim().length === 0) {
+  if (!phone || String(phone).trim().length === 0) {
     return (
       <TextState
         title={t("history.title")}
@@ -49,7 +49,7 @@ function PatientHistoryTimeline({phone}) {
         <CardContent className="p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="size-11 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold text-lg">
-              {(patientInfo?.name || phone).slice(0, 2).toUpperCase()}
+              {String(patientInfo?.name || phone || "").slice(0, 2).toUpperCase()}
             </div>
             <div>
               <h3 className="font-bold text-lg text-foreground">
