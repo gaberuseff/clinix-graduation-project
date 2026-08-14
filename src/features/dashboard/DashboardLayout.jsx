@@ -64,7 +64,18 @@ function DashboardLayout() {
 
   const statCards = [
     {
-      title: t("stats.todayTotal"),
+      title:
+        daysFilter === 7
+          ? i18n.language === "ar"
+            ? "حجوزات آخر 7 أيام"
+            : "Bookings (Last 7 Days)"
+          : daysFilter === 30
+            ? i18n.language === "ar"
+              ? "حجوزات آخر 30 يوم"
+              : "Bookings (Last 30 Days)"
+            : i18n.language === "ar"
+              ? "حجوزات آخر 90 يوم"
+              : "Bookings (Last 90 Days)",
       value: today_total_bookings,
       icon: RiBookmarkLine,
       colorClass: "text-primary bg-primary/10 border-primary/20",
@@ -103,15 +114,21 @@ function DashboardLayout() {
   return (
     <div className="max-w-[1400px] mx-auto w-full px-4 space-y-7">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b pb-3.5 border-border/40">
-        <PageHeader
-          icon={RiDashboard3Line}
-          title={t("nav.dashboard")}
-        />
+        <PageHeader icon={RiDashboard3Line} title={t("nav.dashboard")} />
         <div className="flex items-center gap-1 bg-muted/40 p-1 rounded-xl border border-border/40 self-start sm:self-auto shrink-0">
           {[
-            {value: 7, label: i18n.language === "ar" ? "آخر 7 أيام" : "Last 7 days"},
-            {value: 30, label: i18n.language === "ar" ? "آخر 30 يوم" : "Last 30 days"},
-            {value: 90, label: i18n.language === "ar" ? "آخر 90 يوم" : "Last 90 days"},
+            {
+              value: 7,
+              label: i18n.language === "ar" ? "آخر 7 أيام" : "Last 7 days",
+            },
+            {
+              value: 30,
+              label: i18n.language === "ar" ? "آخر 30 يوم" : "Last 30 days",
+            },
+            {
+              value: 90,
+              label: i18n.language === "ar" ? "آخر 90 يوم" : "Last 90 days",
+            },
           ].map((opt) => (
             <button
               key={opt.value}

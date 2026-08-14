@@ -9,34 +9,40 @@ CREATE OR REPLACE FUNCTION get_doctor_dashboard_stats(
 )
 RETURNS JSON AS $$
 DECLARE
-  v_today_total INT;
-  v_today_pending INT;
-  v_today_completed INT;
-  v_today_cancelled INT;
+  v_total_bookings INT;
+  v_pending_bookings INT;
+  v_completed_bookings INT;
+  v_cancelled_bookings INT;
   v_total_revenue NUMERIC;
   v_chart_data JSON;
   v_offset INTERVAL;
+  v_period_start TIMESTAMPTZ;
 BEGIN
   -- 1. Calculate the timezone offset dynamically
   v_offset := p_local_date::TIMESTAMP - (p_today_start AT TIME ZONE 'UTC');
+  
+  -- Calculate start of the filtered period in UTC
+  v_period_start := (p_local_date - (p_days - 1) * INTERVAL '1 day')::TIMESTAMP - v_offset;
 
-  -- 2. Today's bookings count
+  -- 2. Filtered bookings count (over the last p_days days)
   SELECT COUNT(*),
          COUNT(*) FILTER (WHERE status = 'pending'),
          COUNT(*) FILTER (WHERE status = 'completed'),
          COUNT(*) FILTER (WHERE status = 'cancelled')
-  INTO v_today_total, v_today_pending, v_today_completed, v_today_cancelled
+  INTO v_total_bookings, v_pending_bookings, v_completed_bookings, v_cancelled_bookings
   FROM appointments
   WHERE clinic_id = p_clinic_id
-    AND date >= p_today_start
+    AND date >= v_period_start
     AND date <= p_today_end;
 
-  -- 3. Total revenue (sum of price of all completed bookings)
+  -- 3. Total revenue (sum of price of all completed bookings in the filtered period)
   SELECT COALESCE(SUM(price), 0)
   INTO v_total_revenue
   FROM appointments
   WHERE clinic_id = p_clinic_id
-    AND status = 'completed';
+    AND status = 'completed'
+    AND date >= v_period_start
+    AND date <= p_today_end;
 
   -- 4. Recent bookings chart (last p_days days using index-friendly timezone offset)
   SELECT COALESCE(json_agg(t), '[]'::json)
@@ -63,10 +69,10 @@ BEGIN
 
   -- 5. Return as JSON
   RETURN json_build_object(
-    'today_total_bookings', COALESCE(v_today_total, 0),
-    'today_pending_bookings', COALESCE(v_today_pending, 0),
-    'today_completed_bookings', COALESCE(v_today_completed, 0),
-    'today_cancelled_bookings', COALESCE(v_today_cancelled, 0),
+    'today_total_bookings', COALESCE(v_total_bookings, 0),
+    'today_pending_bookings', COALESCE(v_pending_bookings, 0),
+    'today_completed_bookings', COALESCE(v_completed_bookings, 0),
+    'today_cancelled_bookings', COALESCE(v_cancelled_bookings, 0),
     'total_revenue', COALESCE(v_total_revenue, 0),
     'recent_bookings_chart', v_chart_data
   );

@@ -275,7 +275,7 @@ function LandingPage() {
             
             <div className="relative border border-border/80 bg-card/90 shadow-2xl rounded-3xl overflow-hidden p-2.5 transform transition-all duration-500 hover:scale-[1.02]">
               <img
-                src="/eyan-hero-dashboard.jpg"
+                src="/hero.png"
                 alt="Eyan Dashboard Mockup"
                 className="w-full h-auto rounded-2xl object-cover border border-border/40"
               />
