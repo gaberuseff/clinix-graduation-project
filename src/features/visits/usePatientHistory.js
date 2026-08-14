@@ -29,6 +29,16 @@ function usePatientHistory(phone) {
     refetchOnWindowFocus: false,
   });
 
+  console.log("usePatientHistory hook run:", {
+    phone,
+    cleanPhone,
+    clinicId,
+    historyData: history,
+    patientInfoData: patientInfo,
+    isLoadingHistory,
+    isLoadingPatient
+  });
+
   return {
     history: history || [],
     patientInfo,

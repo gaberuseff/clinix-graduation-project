@@ -33,18 +33,13 @@ function VisitsLayout() {
 
   const queryClient = useQueryClient();
 
-  const isFetchingTodayAppointments = useIsFetching({ queryKey: ["today-appointments"] }) > 0;
-  const isFetchingTodayVisits = useIsFetching({ queryKey: ["today-visits"] }) > 0;
-  const isFetchingHistory = useIsFetching({ queryKey: ["medical_records"] }) > 0 || useIsFetching({ queryKey: ["patient-info"] }) > 0;
+  console.log("VisitsLayout rendering:", {
+    phoneSearch,
+    activeTab,
+    searchParams: searchParams?.toString(),
+  });
 
-  const isFetching =
-    activeTab === "today"
-      ? isFetchingTodayAppointments
-      : activeTab === "completed"
-        ? isFetchingTodayVisits
-        : activeTab === "history"
-          ? isFetchingHistory
-          : false;
+  const isFetching = useIsFetching() > 0;
 
   const handleRefetch = () => {
     if (activeTab === "today") {

@@ -20,7 +20,7 @@ function useTodayVisits() {
   });
 
   return {
-    visits,
+    visits: visits || [],
     isLoading: isLoadingUser || isLoadingVisits,
     error,
     isError,

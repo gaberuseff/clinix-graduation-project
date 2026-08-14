@@ -21,6 +21,8 @@ function PatientHistoryTimeline({phone}) {
   const {t} = useAppTranslation("visits");
   const {history = [], patientInfo, isLoading} = usePatientHistory(phone);
 
+  console.log("PatientHistoryTimeline rendering:", { phone, history, patientInfo, isLoading });
+
   const [visitToEdit, setVisitToEdit] = useState(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
