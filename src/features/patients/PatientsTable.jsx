@@ -167,12 +167,12 @@ function PatientsTable() {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end" className="w-40">
-                        <DropdownMenuItem
+                        {/* <DropdownMenuItem
                           onClick={() => navigate(`/visits?phone=${encodeURIComponent(patient.phone)}`)}
                           className="gap-2 text-emerald-600 dark:text-emerald-400 font-semibold">
                           <RiStethoscopeLine className="size-4" />
                           <span>الكشوفات والسجل</span>
-                        </DropdownMenuItem>
+                        </DropdownMenuItem> */}
                         <DropdownMenuItem
                           onClick={() => handleEdit(patient)}
                           className="gap-2">
